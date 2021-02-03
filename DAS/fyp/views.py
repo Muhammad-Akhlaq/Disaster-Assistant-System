@@ -26,7 +26,15 @@ def events(request):
     return render(request, 'events.html')
 
 def contact(request):
-
+    if request.method=='POST':
+        print('This is post')
+        name= request.POST['name']
+        email= request.POST['email']
+        phone= request.POST['phone']
+        desc= request.POST['desc']
+        ins = Contact(name=name, email=email, phone=phone, desc=desc)
+        ins.save()
+        print('Data has been written in the database')
     return render(request, 'contact.html')
 
 def blog(request):
