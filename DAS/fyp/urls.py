@@ -10,5 +10,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('blogpost/<str:slug>', views.blogpost, name='blog'),
     path('awareness/', views.awareness, name='awareness'),
+    path('search/', views.search, name='search'),
     path('bloghome/', views.blog, name='blog')
 ]

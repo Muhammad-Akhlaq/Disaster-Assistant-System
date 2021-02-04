@@ -65,4 +65,27 @@ def blogpost(request, slug):
     context = {'blog': blog}
     return render(request, 'blogpost.html', context)
 
-
+def search(request):
+    query=request.GET['query']
+    page=request.GET.get('page')
+    print('page=',page)
+    blogtitle=Blog.objects.filter(title__icontains=query)
+    blogintro=Blog.objects.filter(short_desc__icontains=query)
+    blogs=blogtitle.union(blogintro)
+    no_of_posts=5
+    if page is None:
+        page=1
+    else:
+        page=int(page)
+    length=len(blogs)
+    blogs=blogs[(page-1)*no_of_posts:page*no_of_posts]
+    if page>1:
+        prev = page-1
+    else:
+        prev = None
+    if page<math.ceil(length/no_of_posts):
+        nxt = page + 1
+    else:
+        nxt = None
+    context={'blogs':blogs,'query':query,'prev':prev,"nxt":nxt}
+    return render(request,'search.html',context)

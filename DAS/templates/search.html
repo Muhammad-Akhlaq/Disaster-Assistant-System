@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block title %}
+Search Results
+{% endblock title %}
+{% block body %}
+<div class='container my-3' style="height: 115vh;">
+<h2>Search Results:</h2>
+{% if blogs|length < 1 %}
+<h5>No search result for : <b>{{query}}</b></h5>
+<h5>Try different keywords</h5>
+{% else %}
+{%for blog in blogs%}
+<div class="my-2">
+  <div>
+    <h2 class="mt-0"><a href="/blogpost/{{blog.slug}}" class="text-dark">{{blog.title}}</a></h2>
+    <p>{{blog.intro|slice:250}}.....</p>
+  </div>
+  <a href="/blogpost/{{blog.slug}}"><button class='btn btn-outline-primary btn-sm'>Read More</button></a>
+  <br>
+</div>
+{% endfor %}
+<div class="my-3">
+  {% if  prev%}
+  <button class="btn btn-primary "><a class="text-light"href="/search?query={% if query %}{{query}}{% endif %}&page={{prev}}">&laquo; Previous</a></button>
+  {% else %}
+  <!--<button class="btn btn-primary "><a class="text-light"href="#">&laquo; Previous</a></button>-->
+  {% endif %}
+  {% if  nxt%}
+  <button class="btn btn-primary float-right"><a class="text-light"href="/search?query={% if query %}{{query}}{% endif %}&page={{nxt}}">Next &raquo;</a></button>
+  {% else %}
+  <!--<button class="btn btn-primary float-right"><a class="text-light"href="#">Next &raquo;</a></button>-->
+  {% endif %}
+</div>
+</div>
+{% endif %}
+
+{% endblock body %}
