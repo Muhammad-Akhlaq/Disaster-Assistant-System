@@ -1,9 +1,36 @@
 {% extends 'base.html' %}
-{% block awarenessactive %}active{% endblock awarenessactive %}
-{% block body %} 
-    
-    <h2> Awareness </h2>
 
-    
-    
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'static/awareness.css' %}">
+
+{% block awarenessactive %}active{% endblock awarenessactive %}
+
+{% block body %}
+
+
+<div>
+
+
+    <!-- Side navigation -->
+    <div class="sidenav">
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+        
+
+    <!-- Page content -->
+    <div>
+
+        <h2> Awareness </h2>
+        
+    </div>
+
+
+
+</div>
+
+
+
 {% endblock body %}
