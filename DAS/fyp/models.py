@@ -28,3 +28,16 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Blogwrite(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    short_desc = models.CharField(max_length=300, default="")
+    slug = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now_add=True)
+    author = models.CharField(max_length=20, default="")
+        
+    def __str__(self):
+        return self.title

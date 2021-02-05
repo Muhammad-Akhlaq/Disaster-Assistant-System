@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block title %}
+Blogs
+{% endblock title %}
+
+{% block body %}
+    
+
+<div class="container my-3">
+    <h2 class="text-center my-3">Write BLog</h2>
+    <form action="/writeblog/" method="POST">
+      {% csrf_token %}
+
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Title</label>
+    <textarea class="form-control" id="title" name="title" rows="2"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Content</label>
+    <textarea class="form-control" id="content" name="content" rows="10"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Short Description</label>
+    <textarea class="form-control" id="short_desc" name="short_desc" rows="2"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">slug</label>
+    <textarea class="form-control" id="slug" name="slug" rows="1"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Time</label>
+    <textarea class="form-control" id="time" name="time" rows="1"></textarea>
+  </div>
+
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Author</label>
+    <textarea class="form-control" id="author" name="author" rows="1"></textarea>
+  </div>
+
+        <button type="submit" class="btn btn-primary">Success</button>
+      </form>
+</div>
+
+    
+    
+{% endblock body %}

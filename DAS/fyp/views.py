@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from fyp.models import Blog, Contact
+from fyp.models import Blog, Contact, Blogwrite
 import math
 
 
@@ -89,3 +89,19 @@ def search(request):
         nxt = None
     context={'blogs':blogs,'query':query,'prev':prev,"nxt":nxt}
     return render(request,'search.html',context)
+
+def blogwrite(request):
+    if request.method=='POST':
+        print('This is post')
+        sno= request.POST['sno']
+        title= request.POST['title']
+        content= request.POST['content']
+        short_desc= request.POST['short_desc']
+        slug= request.POST['slug']
+        time= request.POST['time']
+        author= request.POST['author']        
+        ins = Blogwrite(sno=sno, title=title, content=content, short_desc=short_desc, slug=slug, time=time, author=author)
+        ins.save()
+
+        print('Data has been written in the database')
+    return render(request, 'blogwrite.html')

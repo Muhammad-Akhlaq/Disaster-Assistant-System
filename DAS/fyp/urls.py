@@ -11,5 +11,6 @@ urlpatterns = [
     path('blogpost/<str:slug>', views.blogpost, name='blog'),
     path('awareness/', views.awareness, name='awareness'),
     path('search/', views.search, name='search'),
-    path('bloghome/', views.blog, name='blog')
+    path('bloghome/', views.blog, name='blog'),
+    path('blogwrite/', views.blogwrite, name='blogwrite')
 ]
