@@ -93,14 +93,12 @@ def search(request):
 def blogwrite(request):
     if request.method=='POST':
         print('This is post')
-        #sno= request.POST['sno']
         title= request.POST['title']
         content= request.POST['content']
         short_desc= request.POST['short_desc']
         slug= request.POST['slug']
-        time= request.POST['time']
         author= request.POST['author']        
-        ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, time=time, author=author)
+        ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, author=author)
         ins.save()
 
         print('Data has been written in the database')
