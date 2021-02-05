@@ -9,18 +9,22 @@ Blogs
 
 <div class="container my-3">
     <h2 class="text-center my-3">Write BLog</h2>
-    <form action="/writeblog/" method="POST">
+    <form action="/blogwrite/" method="POST">
       {% csrf_token %}
 
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">S. No.</label>
+    <textarea class="form-control" id="sno" name="sno" rows="1"></textarea>
+  </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Title</label>
-    <textarea class="form-control" id="title" name="title" rows="2"></textarea>
+    <textarea class="form-control" id="title" name="title" rows="1"></textarea>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Content</label>
-    <textarea class="form-control" id="content" name="content" rows="10"></textarea>
+    <textarea class="form-control" id="content" name="content" rows="5"></textarea>
   </div>
 
   <div class="form-group">
@@ -29,7 +33,7 @@ Blogs
   </div>
 
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">slug</label>
+    <label for="exampleFormControlTextarea1">Slug</label>
     <textarea class="form-control" id="slug" name="slug" rows="1"></textarea>
   </div>
 
@@ -43,7 +47,7 @@ Blogs
     <textarea class="form-control" id="author" name="author" rows="1"></textarea>
   </div>
 
-        <button type="submit" class="btn btn-primary">Success</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </form>
 </div>
 
