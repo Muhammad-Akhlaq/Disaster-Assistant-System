@@ -1,11 +1,12 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Blog(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = RichTextField(null=True)
+    #content = models.TextField()
     short_desc = models.CharField(max_length=300, default="")
     slug = models.CharField(max_length=100)
     time = models.DateTimeField(auto_now_add=True)
