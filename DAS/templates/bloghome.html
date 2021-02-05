@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
-
 {% block blogactive %}active{% endblock blogactive %}
+{% block title %}
+Blogs
+{% endblock title %}
+
 {% block css %}
 <style>
   .container {
@@ -42,8 +45,7 @@
     </div>
 
 
-    <a href="/blogpost/{{blog.slug}}" class="text-dark"><button type="button"
-        class="btn btn-outline-primary btn-sm">Read More</button></a>
+    <a href="/blogpost/{{blog.slug}}" class="text-dark"><h5 style="color: blue;">Read More...</h5></a>
   </div>
 
   {% endfor %}

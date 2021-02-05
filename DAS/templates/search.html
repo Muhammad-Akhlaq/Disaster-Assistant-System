@@ -11,13 +11,15 @@ Search Results
 <h5>Try different keywords</h5>
 {% else %}
 {%for blog in blogs%}
-<div class="my-2">
-  <div>
-    <h2 class="mt-0"><a href="/blogpost/{{blog.slug}}" class="text-dark">{{blog.title}}</a></h2>
-    <p>{{blog.intro|slice:250}}.....</p>
-  </div>
-  <a href="/blogpost/{{blog.slug}}"><button class='btn btn-outline-primary btn-sm'>Read More</button></a>
-  <br>
+
+  <div class="my-4 p-3 border">
+    <p class="mb-0 "> Article by <a href="#">{{blog.author}}</a></p>
+    <h4 class="text-dark"> <a href="/blogpost/{{blog.slug}}" class="text-dark">{{blog.title}}</a></h4>
+    <div>
+      {{blog.short_desc|slice:200}}...
+    </div>
+  
+<a href="/blogpost/{{blog.slug}}" class="text-dark"><h5 style="color: blue;">Read More...</h5></a>  <br>
 </div>
 {% endfor %}
 <div class="my-3">
