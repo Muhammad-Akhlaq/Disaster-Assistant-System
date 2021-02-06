@@ -52,14 +52,14 @@ Blogs
 
   <div class="my-3">
     {% if prev %}
-    <button class="btn btn-primary"><a class="text-light" href="/blog?page={{prev}}">&laquo;Previous</a></button>
+    <button class="btn btn-primary"><a class="text-light" href="/bloghome?page={{prev}}">&laquo;Previous</a></button>
     {% else %}
     <button class="btn btn-primary"><a class="text-light" href="#">&laquo;Previous</a></button>
     {% endif %}
 
 
     {% if nxt %}
-    <button class="btn btn-primary float-right"><a class="text-light" href="/blog?page={{nxt}}">Next
+    <button class="btn btn-primary float-right"><a class="text-light" href="/bloghome?page={{nxt}}">Next
         &raquo;</a></button>
     {% else %}
     <button class="btn btn-primary float-right"><a class="text-light" href="#">Next &raquo;</a></button>
