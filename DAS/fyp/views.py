@@ -103,3 +103,17 @@ def blogwrite(request):
 
         print('Data has been written in the database')
     return render(request, 'blogwrite.html')
+
+
+def earthquake(request):
+
+    return render(request, 'earthquake.html')
+
+
+def flood(request):
+
+    return render(request, 'flood.html')
+
+
+
+    
