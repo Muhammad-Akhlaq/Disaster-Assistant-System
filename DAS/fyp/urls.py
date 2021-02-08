@@ -15,6 +15,8 @@ urlpatterns = [
     path('blogwrite/', views.blogwrite, name='blogwrite'),
     path('earthquake/', views.earthquake, name='earthquake'),
     path('flood/', views.flood, name='flood'),
-    
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.Login, name='login'),
+    path('logout/', views.Logout, name='logout')
 
 ]

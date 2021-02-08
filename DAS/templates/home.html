@@ -3,7 +3,16 @@
 Disaster Assistance
 {% endblock title %}
 {% block body %} 
-
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-primary my-0" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+{% endif %}
 
 <h1> This is home Page </h1>
 {% endblock body %}
