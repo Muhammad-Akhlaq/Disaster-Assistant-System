@@ -7,12 +7,12 @@ padding: 60px 0;
 
 section .section-title {
 text-align: center;
-color: #007b5e;
+color: #343a40;
 margin-bottom: 50px;
 text-transform: uppercase;
 }
 #footer {
-background: #007b5e !important;
+background: #343a40 !important;
 }
 #footer h5{
 padding-left: 10px;
