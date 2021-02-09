@@ -28,6 +28,11 @@ def events(request):
 
     return render(request, 'events.html')
 
+def weather(request):
+
+    return render(request, 'weather.html')
+
+
 def contact(request):
     if request.method=='POST':
         print('This is post')
