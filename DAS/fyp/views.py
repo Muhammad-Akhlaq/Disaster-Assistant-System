@@ -12,25 +12,36 @@ def home(request):
 
     return render(request, 'home.html')
 
+
+
 def awareness(request):
 
     return render(request, 'awareness.html')
+
+
 
 def estimation(request):
 
     return render(request, 'estimation.html')
 
+
+
 def news(request):
 
     return render(request, 'news.html')
+
+
 
 def events(request):
 
     return render(request, 'events.html')
 
+
+
 def weather(request):
 
     return render(request, 'weather.html')
+
 
 
 def contact(request):
@@ -44,6 +55,8 @@ def contact(request):
         ins.save()
         print('Data has been written in the database')
     return render(request, 'contact.html')
+
+
 
 def blog(request):
     no_of_posts = 5
@@ -68,10 +81,13 @@ def blog(request):
     return render(request, 'bloghome.html', context)
 
 
+
 def blogpost(request, slug):
     blog = Blog.objects.filter(slug=slug).first
     context = {'blog': blog}
     return render(request, 'blogpost.html', context)
+
+
 
 def search(request):
     query=request.GET['query']
@@ -98,6 +114,8 @@ def search(request):
     context={'blogs':blogs,'query':query,'prev':prev,"nxt":nxt}
     return render(request,'search.html',context)
 
+
+
 def blogwrite(request):
     if request.method=='POST':
         print('This is post')
@@ -113,9 +131,28 @@ def blogwrite(request):
     return render(request, 'blogwrite.html')
 
 
+
+def blogupdate(request):
+
+    if request.method=='POST':
+        print('This is post')
+        title= request.POST['title']
+        content= request.POST['content']
+        short_desc= request.POST['short_desc']
+        slug= request.POST['slug']  
+        ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug)
+        ins.save()
+
+        print('Data has been written in the database')
+
+    return render(request, 'blogupdate.html')
+
+
+
 def earthquake(request):
 
     return render(request, 'earthquake.html')
+
 
 
 def flood(request):
@@ -151,6 +188,8 @@ def signup(request):
     else:
         return HttpResponse("404-Not Found")
 
+
+
 def Login(request):
     if request.method=='POST':
         loginusername= request.POST['loginusername']
@@ -166,6 +205,9 @@ def Login(request):
             return redirect("/")
     else:
         return HttpResponse("404-Not Found")
+
+
+
 def Logout(request):
     logout(request)
     messages.success(request,"Successfully logged out")
