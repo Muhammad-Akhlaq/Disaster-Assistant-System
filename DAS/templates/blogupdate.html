@@ -15,31 +15,31 @@ Update Blog
     <h2 class="text-center my-3">Update BLog</h2>
 
 
-    <form action="/blogupdate/" method="POST">
+    <form action="/blogupdate/{{blog.title}}" method="POST">
       {% csrf_token %}
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Title</label>
-    <textarea class="form-control" id="title" name="title" rows="1"></textarea>
+    <textarea class="form-control" id="title" name="title" rows="1">{{blog.title}}</textarea>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Content</label>
-    <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+    <textarea class="form-control" id="content" name="content" rows="5">{{blog.content|safe}}</textarea>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Short Description</label>
-    <textarea class="form-control" id="short_desc" name="short_desc" rows="2"></textarea>
+    <textarea class="form-control" id="short_desc" name="short_desc" rows="2">{{blog.short_desc}}</textarea>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Slug</label>
-    <textarea class="form-control" id="slug" name="slug" rows="1"></textarea>
+    <textarea class="form-control" id="slug" name="slug" rows="1">{{blog.slug}}</textarea>
   </div>
 
 
-        <button type="submit" class="btn btn-primary">Save</button>
+  <a class="btn btn-primary" href="/blogpost/{{blog.slug}}" role="button">Save</a>
       </form>
 </div>
 

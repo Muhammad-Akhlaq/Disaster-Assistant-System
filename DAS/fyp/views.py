@@ -132,20 +132,18 @@ def blogwrite(request):
 
 
 
-def blogupdate(request):
-
+def blogupdate(request, title):
+    editblog = title
+    blog = Blog.objects.filter(title=editblog).first
+    context = {'blog':blog}
     if request.method=='POST':
-        print('This is post')
         title= request.POST['title']
         content= request.POST['content']
         short_desc= request.POST['short_desc']
         slug= request.POST['slug']  
-        ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug)
-        ins.save()
+        Blog.objects.filter(title=editblog).update(title=title, content=content, short_desc=short_desc, slug=slug)
 
-        print('Data has been written in the database')
-
-    return render(request, 'blogupdate.html')
+    return render(request, 'blogupdate.html',context)
 
 
 
