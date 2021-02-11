@@ -8,11 +8,34 @@ Weather
     
 
 
-    <div class="abc">
-        <h2> weather </h2>
-
+<div class="container my-3">
+    <h1 class="text-center">weather</h1>
+  <br />
+  <br />
+  <div class="row justify-content-center">
+    <form method="post" class="col-md-6 col-md-offset-3">
+      {% csrf_token %}
+      <div class="input-group text-center">
+        <input type="text" class="form-control" name="city" placeholder="Search">
+        <div class="input-group-btn">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+        </div>
     </div>
-
+  <div class="row justify-content-center">
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="col-md-6 col-md-offset-3">
+      <h3>country code : {{country_code}}</h1>
+        <h5>coordinate : {{coordinate}}</h5>
+        <h5>temp : {{temp}}</h5>
+        <h5>pressure : {{pressure}} </h5>
+        <h5>humidity : {{humidity}}</h5>
+        <h5>Description : {{Description}}</h5>
+    </div>
+    {% endif %}
+  </div>
+</div>
 
 
     
