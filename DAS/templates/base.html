@@ -23,7 +23,8 @@
 
   <script src="{% static '/blog.js' %}"></script>
 
-
+  {% block additional_styles %}
+  {% endblock %}
   <title>{% block title %} {% endblock title %}</title>
 
 </head>
@@ -32,7 +33,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">DSA</a>
+    <a class="navbar-brand" href="/">DAS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -198,7 +199,9 @@
 
 
   <!-- Footer -->
+  {% block footer %}
   <section id="footer">
+  {% endblock footer %}
     <div class="container">
       <div class="row text-center text-xs-center text-sm-left text-md-left">
         <div class="col-xs-12 col-sm-4 col-md-4">
