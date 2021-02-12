@@ -1,8 +1,27 @@
-{% extends 'base.html' %}
-{% block title %}
-Disaster Assistance
-{% endblock title %}
+
+<style>
+body, html {
+height: 100%;
+margin: 0;
+}
+.background {
+background-image: url("/static/images/home1.jpg");
+height: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+</style>
+
+
+
 {% block body %} 
+
+<div class="background"></div>
+
+
+
+
 {% if messages %}
 {% for message in messages %}
     <div class="alert alert-primary my-0" role="alert">
@@ -14,5 +33,5 @@ Disaster Assistance
   {% endfor %}
 {% endif %}
 
-<h1> This is home Page </h1>
+
 {% endblock body %}
