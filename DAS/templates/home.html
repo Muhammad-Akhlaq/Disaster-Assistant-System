@@ -1,4 +1,3 @@
-
 <style>
 body, html {
 height: 100%;
@@ -17,7 +16,20 @@ background-size: cover;
 
 {% block body %} 
 
-<div class="background"></div>
+<div class="background">
+  <h1 class="text-center">weather</h1>
+  <br />
+  <br />
+  <div class="row justify-content-center">
+    <form method="post" class="col-md-6 col-md-offset-3">
+      {% csrf_token %}
+      <div class="input-group text-center">
+        <input type="text" class="form-control" name="city" placeholder="Search">
+        <div class="input-group-btn">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+</div>
 
 
 
