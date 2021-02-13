@@ -172,7 +172,8 @@ def blogupdate(request, title):
         short_desc= request.POST['short_desc']
         slug= request.POST['slug']  
         Blog.objects.filter(title=editblog).update(title=title, content=content, short_desc=short_desc, slug=slug)
-
+        messages.error(request,"Blog successfully Updated!")
+        return redirect('/bloghome/')
     return render(request, 'blogupdate.html',context)
 
 
