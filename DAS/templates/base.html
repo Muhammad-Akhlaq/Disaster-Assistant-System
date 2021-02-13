@@ -99,6 +99,24 @@
   </nav>
 
 
+
+<!--Alert Massage-->
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-primary my-0" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+
+
+
+
   <!-- Signup Modal -->
   <div class="modal fade" id="Signup" tabindex="-1" role="dialog" aria-labelledby="Signup" aria-hidden="true">
     <div class="modal-dialog" role="document">

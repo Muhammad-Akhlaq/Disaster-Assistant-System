@@ -143,18 +143,22 @@ def search(request):
 
 
 def blogwrite(request):
+    context={}
     if request.method=='POST':
-        print('This is post')
         title= request.POST['title']
         content= request.POST['content']
         short_desc= request.POST['short_desc']
         slug= request.POST['slug']
-        author= request.POST['author']        
-        ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, author=author)
-        ins.save()
-
-        print('Data has been written in the database')
-    return render(request, 'blogwrite.html')
+        author= request.POST['author']
+        context={'title':title,'short_desc':short_desc,'slug':slug,'author':author}
+        if content!='':        
+            ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, author=author)
+            ins.save()
+            messages.error(request,"Blog successfully written!")
+            context={}
+        else:
+            messages.error(request,"Content is blanked...Write something")
+    return render(request, 'blogwrite.html',context)
 
 
 
@@ -223,7 +227,6 @@ def Login(request):
         if user is not None:
             login(request,user)
             messages.success(request,"Successfully logged in")
-            return redirect("/")
         else:
             messages.error(request,"Invalid Credentials, Please try again")
             return redirect("/")
