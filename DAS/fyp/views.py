@@ -5,7 +5,12 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 import math
 import json 
-import urllib.request 
+import urllib.request
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 # Create your views here.
 
 def home(request):
@@ -21,8 +26,26 @@ def awareness(request):
 
 
 def estimation(request):
-
-    return render(request, 'estimation.html')
+    context={}
+    if request.method=='POST':
+        print('This is post')
+        duration= request.POST['Duration']
+        displaces= request.POST['Displaced']
+        severity= request.POST['Severity']
+        affected= request.POST['Affected Area']
+        magnitude= request.POST['Magnitude']
+        c_x= request.POST['Centroid X']
+        c_y= request.POST['Centroid Y']
+        data = pd.read_excel('static/c.xls')
+        data.dropna(inplace=True)
+        X = data.drop(['Dead','Nothing'],axis=1)
+        y = data['Dead']
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
+        knn = KNeighborsClassifier(n_neighbors=25)
+        knn.fit(X_train,y_train)
+        pred = knn.predict([[duration,displaces,severity,affected,magnitude,c_x,c_y]])
+        context={'pred':pred}
+    return render(request, 'estimation.html',context)
 
 
 
