@@ -171,9 +171,10 @@ def blogwrite(request):
         short_desc= request.POST['short_desc']
         slug= request.POST['slug']
         author= request.POST['author']
+        username= request.POST['username']
         context={'title':title,'short_desc':short_desc,'slug':slug,'author':author}
         if content!='':        
-            ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, author=author)
+            ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, author=author,username=username)
             ins.save()
             messages.error(request,"Blog successfully written!")
             context={}
@@ -183,11 +184,12 @@ def blogwrite(request):
 
 
 
-def myblogs(request):
-
+def myblogs(request,username):
+    blogs = Blog.objects.filter(username=username)
+    context={'blogs':blogs}
     
 
-        return render(request, 'myblogs.html')
+    return render(request, 'myblogs.html',context)
 
 
 

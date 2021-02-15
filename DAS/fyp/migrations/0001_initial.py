@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('short_desc', models.CharField(default='', max_length=300)),
                 ('slug', models.CharField(max_length=100)),
                 ('time', models.DateTimeField(auto_now_add=True)),
+                ('username', models.CharField(default='', max_length=20)),
                 ('author', models.CharField(default='', max_length=20)),
             ],
         ),

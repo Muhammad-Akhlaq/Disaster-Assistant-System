@@ -6,12 +6,29 @@ My Blogs
 
 {% block body %}
     
+{% if user.is_authenticated %}
+<div class="container">
+{% for blog in blogs %}
 
-
-    <div class="abc">
-        <h2> {{}} </h2>
-
+<h2 class="text-center my-3">My BLog</h2>
+  <div class="my-4 p-3 border">
+    <a class="btn btn-primary my-2 my-sm-0" style="float:right;" href="/blogupdate/{{blog.title}}" role="button">Update</a>
+    
+    <p class="mb-0 "> Article by <a href="#">{{blog.author}}</a></p>
+    <h4 class="text-dark"> <a href="/blogpost/{{blog.slug}}" class="text-dark">{{blog.title}}</a></h4>
+    <div>
+      {{blog.short_desc|slice:200}}...
     </div>
+
+
+    <a href="/blogpost/{{blog.slug}}" class="text-dark"><h5 style="color: blue;">Read More...</h5></a>
+  </div>
+
+  {% endfor %}    
+</div>
+{% endif %}
+
+    
 
 
 

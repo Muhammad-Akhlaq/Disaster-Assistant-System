@@ -34,7 +34,7 @@ Blogs
     {% if user.is_authenticated %}
 
     <a class="btn btn-primary btn-lg" href="/blogwrite" role="button">Write BLog</a>
-    <a class="btn btn-primary btn-lg" href="/myblogs" role="button">My BLogs</a>
+    <a class="btn btn-primary btn-lg" href="/myblogs/{{user}}" role="button">My BLogs</a>
 
     {% endif %}
   </div>

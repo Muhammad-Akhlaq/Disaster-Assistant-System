@@ -6,7 +6,7 @@ Blogs
 
 {% block body %}
     
-
+{% if user.is_authenticated %}
 <div class="container my-3">
     <h2 class="text-center my-3">Write BLog</h2>
     <form action="/blogwrite/" method="POST">
@@ -37,11 +37,17 @@ Blogs
     <label for="exampleFormControlTextarea1">Author</label>
     <textarea class="form-control" id="author" name="author" rows="1" required>{{author}}</textarea>
   </div>
+  
+  <div class="form-group">
+    <input type="hidden" class="form-control" id="username" name="username" value="{{user}}">
+  </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
       </form>
 </div>
 
+
+{% endif %}
     
     
 {% endblock body %}
