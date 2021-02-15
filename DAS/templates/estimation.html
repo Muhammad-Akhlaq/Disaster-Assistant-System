@@ -6,20 +6,12 @@ Estimation
 
 {% block body %}
 
+ {% if user.is_authenticated %}
+
 <div class="container my-3">
     <h2 class="text-center my-3">Estimation</h2>
     <form action="/estimation/" method="POST">
         {% csrf_token %}
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Duration</label>
-            <textarea class="form-control" id="Duration" name="Duration" rows="1" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Displaced</label>
-            <textarea class="form-control" id="Displaced" name="Displaced" rows="1"></textarea>
-        </div>
 
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Severity</label>
@@ -50,10 +42,19 @@ Estimation
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
+
+    {% else %}
+    <p>Please login to see this page.</p>
+    
+    {% endif %}
+
+
 {% if pred %}
 <div class="col-md-6 col-md-offset-3">
     <h3>Predicted Deaths : {{pred}}</h1>
 </div>
 {% endif %}
+
+
 
 {% endblock body %}

@@ -15,6 +15,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('bloghome/', views.blog, name='blog'),
     path('blogwrite/', views.blogwrite, name='blogwrite'),
+    path('myblogs/', views.myblogs, name='myblogs'),
     path('earthquake/', views.earthquake, name='earthquake'),
     path('flood/', views.flood, name='flood'),
     path('signup/', views.signup, name='signup'),

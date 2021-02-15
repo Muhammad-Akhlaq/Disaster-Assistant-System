@@ -29,8 +29,6 @@ def estimation(request):
     context={}
     if request.method=='POST':
         print('This is post')
-        duration= request.POST['Duration']
-        displaces= request.POST['Displaced']
         severity= request.POST['Severity']
         affected= request.POST['Affected Area']
         magnitude= request.POST['Magnitude']
@@ -43,7 +41,7 @@ def estimation(request):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
         knn = KNeighborsClassifier(n_neighbors=25)
         knn.fit(X_train,y_train)
-        pred = knn.predict([[duration,displaces,severity,affected,magnitude,c_x,c_y]])
+        pred = knn.predict([[severity,affected,magnitude,c_x,c_y]])
         context={'pred':pred}
     return render(request, 'estimation.html',context)
 
@@ -185,6 +183,14 @@ def blogwrite(request):
 
 
 
+def myblogs(request):
+
+    
+
+        return render(request, 'myblogs.html')
+
+
+
 def blogupdate(request, title):
     editblog = title
     blog = Blog.objects.filter(title=editblog).first
@@ -251,6 +257,7 @@ def Login(request):
         if user is not None:
             login(request,user)
             messages.success(request,"Successfully logged in")
+            return redirect("/")
         else:
             messages.error(request,"Invalid Credentials, Please try again")
             return redirect("/")
