@@ -36,7 +36,7 @@ def estimation(request):
         c_y= request.POST['Centroid Y']
         data = pd.read_excel('static/c.xls')
         data.dropna(inplace=True)
-        X = data.drop(['Dead','Nothing'],axis=1)
+        X = data.drop(['Dead','Nothing','Displaced','Duration in Days'],axis=1)
         y = data['Dead']
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
         knn = KNeighborsClassifier(n_neighbors=25)
