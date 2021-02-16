@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block eventsactive %}active{% endblock eventsactive %}
+{% block weatheractive %}active{% endblock weatheractive %}
 {% block title %}
 Weather
 {% endblock title %}
@@ -10,7 +10,6 @@ Weather
 
 <div class="container my-3">
     <h1 class="text-center">weather</h1>
-  <br />
   <br />
   <div class="row justify-content-center">
     <form method="post" class="col-md-6 col-md-offset-3">
@@ -24,7 +23,7 @@ Weather
         </div>
     </div>
   <div class="row justify-content-center">
-    {% if country_code and coordinate and temp and pressure and humidity %}
+    {% if country_code and coordinate and temp and pressure and humidity and Description %}
     <div class="col-md-6 col-md-offset-3">
       <h3>country code : {{country_code}}</h1>
         <h5>coordinate : {{coordinate}}</h5>
