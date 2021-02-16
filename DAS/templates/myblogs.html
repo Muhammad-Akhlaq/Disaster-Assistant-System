@@ -8,9 +8,9 @@ My Blogs
     
 {% if user.is_authenticated %}
 <div class="container">
+  <h2 class="text-center my-3">My BLog</h2>
 {% for blog in blogs %}
 
-<h2 class="text-center my-3">My BLog</h2>
   <div class="my-4 p-3 border">
     <a class="btn btn-primary my-2 my-sm-0" style="float:right;" href="/blogupdate/{{blog.title}}" role="button">Update</a>
     
