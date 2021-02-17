@@ -86,11 +86,11 @@
         </ul>
         {% else %}
         <!-- Button trigger Login modal -->
-        <button type="button" class="btn btn-primary my-2 ml-2 my-sm-0" data-toggle="modal" data-target="#login">
+        <button type="button" class="btn btn-primary my-2 ml-2 my-sm-0" data-toggle="modal" {% block loginhide %}{% endblock loginhide %} data-target="#login">
           Login
         </button>
         <!-- Button trigger Signup modal -->
-        <button type="button" class="btn btn-primary my-2 ml-2 my-sm-0" data-toggle="modal" data-target="#Signup">
+        <button type="button" class="btn btn-primary my-2 ml-2 my-sm-0" data-toggle="modal" {% block signuphide %}{% endblock signuphide %} data-target="#Signup">
           Signup
         </button>
         {% endif %}
