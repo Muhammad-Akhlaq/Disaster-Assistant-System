@@ -178,6 +178,8 @@ def blogwrite(request):
             ins.save()
             messages.error(request,"Blog successfully written!")
             context={}
+            return redirect('/bloghome')
+
         else:
             messages.error(request,"Content is blanked...Write something")
     return render(request, 'blogwrite.html',context)
@@ -259,7 +261,7 @@ def Login(request):
         if user is not None:
             login(request,user)
             messages.success(request,"Successfully logged in")
-            return redirect("/")
+            return redirect("/awareness")
         else:
             messages.error(request,"Invalid Credentials, Please try again")
             return redirect("/")
