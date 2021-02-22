@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse,redirect
+from django.shortcuts import render, HttpResponse,redirect, get_object_or_404
 from fyp.models import Blog, Contact
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -209,6 +209,28 @@ def blogupdate(request, title):
         return redirect('/bloghome/')
     return render(request, 'blogupdate.html',context)
 
+
+
+#def deleteblog(request, title):
+ #   editblog = title
+  #  blog = Blog.objects.filter(title=editblog).first
+   # context = {'blog':blog}
+    #if request.method=='POST':
+     #   obj.delete()
+
+
+      #  messages.error(request,"Blog successfully Updated!")
+       # return redirect('/bloghome/')
+    #return render(request, 'deleteblog.html',context)
+
+
+def deleteblog(request,title):
+    editblog = title
+    obj=get_object_or_404(Blog,title=editblog)
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect("/bloghome")
+    return render(request,"deleteblog.html",{"obj":obj})
 
 
 def earthquake(request):

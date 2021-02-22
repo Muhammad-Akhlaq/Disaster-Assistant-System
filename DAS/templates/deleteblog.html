@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block title %}
+My Blogs
+{% endblock title %}
+
+{% block body %}
+    
+
+           <form method="POST">
+                {% csrf_token %}
+                <h5>Are you want to delete this story?</h5>
+                <input type="submit"  class="btn btn-lg btn-danger" value="Yes">
+                 <a href="/" class="btn btn-lg btn-info ml-2" >Cancel</a>
+              </form>
+
+
+{% endblock body %}
