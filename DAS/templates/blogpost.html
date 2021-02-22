@@ -5,12 +5,52 @@
 
 <div class="container my-3">
 <h1 class="my-3"> {{blog.title}} </h1>
-<p class="blog-post-meta">{{blog.time}} by <a href="#">{{blog.author}}</a></p>
+<p class="blog-post-meta">{{blog.time}} by <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MyModal">
+ {{blog.author}}</button></p>
+
+
+
+
+
+
+<!-- Modal -->
+
+<div class="modal fade " id="MyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{blog.author}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 <div class="my-3">
     {{blog.content|safe}}
 </div>
     
 </div>
+
+
+
+
+
+
 
 
 {% endblock body %}
