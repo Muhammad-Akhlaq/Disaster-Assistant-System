@@ -229,7 +229,7 @@ def deleteblog(request,title):
     obj=get_object_or_404(Blog,title=editblog)
     if request.method == "POST":
         obj.delete()
-        return HttpResponseRedirect("/bloghome")
+        return redirect("/bloghome")
     return render(request,"deleteblog.html",{"obj":obj})
 
 
