@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse,redirect, get_object_or_404
-from fyp.models import Blog, Contact
+from fyp.models import Blog, Contact, E_Awareness,F_Awareness
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
@@ -54,8 +54,10 @@ def news(request):
 
 
 def events(request):
-
-    return render(request, 'events.html')
+    df = pd.read_excel('static/c.xls')
+    E_data=df.head()
+    context={'paangi':E_data}
+    return render(request, 'events.html',context)
 
 
 
@@ -235,13 +237,19 @@ def deleteblog(request,title):
 
 def earthquake(request):
 
-    return render(request, 'earthquake.html')
+    awareness = E_Awareness.objects.filter().first
+    context = {'awareness': awareness}
+
+    return render(request, 'earthquake.html', context)
 
 
 
 def flood(request):
 
-    return render(request, 'flood.html')
+    fawareness = F_Awareness.objects.filter().first
+    context = {'fawareness': fawareness}
+
+    return render(request, 'flood.html', context)
 
 
 

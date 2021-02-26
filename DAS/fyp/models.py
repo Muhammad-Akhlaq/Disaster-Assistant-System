@@ -27,3 +27,17 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+class E_Awareness(models.Model):
+    title = models.CharField(max_length=200)
+    content = RichTextField(null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class F_Awareness(models.Model):
+    title = models.CharField(max_length=200)
+    content = RichTextField(null=True)
+
+    def __str__(self):
+        return self.title
