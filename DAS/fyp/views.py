@@ -133,6 +133,7 @@ def blog(request):
 
 def blogpost(request, slug):
     blog = Blog.objects.filter(slug=slug).first
+    #user = User.objects.get(username=blog().username)
     context = {'blog': blog}
     return render(request, 'blogpost.html', context)
 
@@ -171,19 +172,21 @@ def blogwrite(request):
         title= request.POST['title']
         content= request.POST['content']
         short_desc= request.POST['short_desc']
-        slug= request.POST['slug']
+        Slug= request.POST['slug']
         author= request.POST['author']
         username= request.POST['username']
-        context={'title':title,'short_desc':short_desc,'slug':slug,'author':author}
-        if content!='':        
-            ins = Blog(title=title, content=content, short_desc=short_desc, slug=slug, author=author,username=username)
+        context={'title':title,'short_desc':short_desc,'slug':Slug,'author':author}
+        slug_check = Blog.objects.filter(slug=Slug).first
+        if content=='':
+            messages.error(request,"Content is blanked...Write something")
+        elif Slug==slug_check().slug:
+            messages.error(request,"Slug should be unique...Write again")
+        else:
+            ins = Blog(title=title, content=content, short_desc=short_desc, slug=Slug, author=author,username=username)
             ins.save()
             messages.error(request,"Blog successfully written!")
             context={}
             return redirect('/bloghome')
-
-        else:
-            messages.error(request,"Content is blanked...Write something")
     return render(request, 'blogwrite.html',context)
 
 
