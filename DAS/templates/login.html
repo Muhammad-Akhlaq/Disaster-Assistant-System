@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block loginactive %}active{% endblock loginactive %}
+{% block title %}
+login
+{% endblock title %}
+{% block footerhidden %}hidden{% endblock footerhidden %}
+{% block additional_styles %}
+<style>
+
+.login_div {
+    width: auto;
+    height: auto;
+    /* Center vertically and horizontally */
+    position: absolute;
+    top: 50%;
+    border: 2px solid;
+    left: 50%;
+    margin: -25px 0 0 -25px; /* apply negative top and left margins to truly center the element */
+}
+
+</style>
+{% endblock additional_styles %}
+
+{% block body %}
+
+
+
+  <!-- Login Modal -->
+<div class="login_div">
+          <form action="/login/" method="POST">
+            {% csrf_token %}
+            <div>
+              <label for="loginusername">Username</label>
+              <input type="text" id="loginusername" name="loginusername"
+                placeholder="Enter username" required>
+            </div>
+            <div>
+              <label for="pass">Password</label>
+              <input type="password" id="pass" name="pass" placeholder="Enter Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+              <a href="/signup/">Signup</a>
+        </form>
+</div>
+
+{% endblock body %}

@@ -51,8 +51,6 @@ def news(request):
 
     return render(request, 'news.html')
 
-
-
 def events(request):
     df = pd.read_excel('static/c.xls')
     E_data=df.head()
@@ -134,7 +132,7 @@ def blog(request):
 def blogpost(request, slug):
     blog = Blog.objects.filter(slug=slug).first
     user = User.objects.get(username=blog().username)
-    context = {'blog': blog,'user':user}
+    context = {'blog': blog,'user_detail':user}
     return render(request, 'blogpost.html', context)
 
 
@@ -223,24 +221,12 @@ def blogupdate(request, title):
 
 
 
-#def deleteblog(request, title):
- #   editblog = title
-  #  blog = Blog.objects.filter(title=editblog).first
-   # context = {'blog':blog}
-    #if request.method=='POST':
-     #   obj.delete()
-
-
-      #  messages.error(request,"Blog successfully Updated!")
-       # return redirect('/bloghome/')
-    #return render(request, 'deleteblog.html',context)
-
-
 def deleteblog(request,title):
     editblog = title
     obj=get_object_or_404(Blog,title=editblog)
     if request.method == "POST":
         obj.delete()
+        messages.error(request,"Blog successfully deleted!")
         return redirect("/bloghome")
     return render(request,"deleteblog.html",{"obj":obj})
 
@@ -287,9 +273,7 @@ def signup(request):
         myuser.save() 
         messages.success(request,"Your Account is successfully created")
         return redirect("/")
-    else:
-        return HttpResponse("404-Not Found")
-
+    return render(request,'signup.html')
 
 
 def Login(request):
@@ -305,8 +289,7 @@ def Login(request):
         else:
             messages.error(request,"Invalid Credentials, Please try again")
             return redirect("/")
-    else:
-        return HttpResponse("404-Not Found")
+    return render(request,'login.html')
 
 
 
