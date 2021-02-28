@@ -6,26 +6,109 @@ login
 {% block footerhidden %}hidden{% endblock footerhidden %}
 {% block additional_styles %}
 <style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  form {border: 3px solid #f1f1f1;}
+  h2 {text-align: center;}
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  .login{
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+  }
 
-.login_div {
+
+  .cancelbtn {
     width: auto;
-    height: auto;
-    /* Center vertically and horizontally */
-    position: absolute;
-    top: 50%;
-    border: 2px solid;
-    left: 50%;
-    margin: -25px 0 0 -25px; /* apply negative top and left margins to truly center the element */
-}
-
-</style>
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+  
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+  
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+  }
+  </style>
 {% endblock additional_styles %}
 
 {% block body %}
+<div class='login'>
+<h2>Login Form</h2>
 
+<form action="/login/" method="post">
+  {% csrf_token %}
+  <div class="imgcontainer">
+    <img src="/static/images/avater.png" alt="Avatar" class="avatar">
+  </div>
 
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="loginusername" id='loginusername' required>
 
-  <!-- Login Modal -->
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="pass" id='pass' required>
+        
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+    <span class="psw">Not have Account <a href="/signup/">Signup?</a></span>
+  </div>
+</form>
+</div>
+  <!-- Login Modal 
 <div class="login_div">
           <form action="/login/" method="POST">
             {% csrf_token %}
@@ -43,5 +126,5 @@ login
               <a href="/signup/">Signup</a>
         </form>
 </div>
-
+-->
 {% endblock body %}
