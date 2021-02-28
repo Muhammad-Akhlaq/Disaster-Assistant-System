@@ -4,12 +4,13 @@
 Search Results
 {% endblock title %}
 {% block body %}
-<div class='container my-3' style="height: 115vh;">
-<h2>Search Results:</h2>
+
+<h2 class="my-3 mx-5">Search Results:</h2>
 {% if blogs|length < 1 %}
 <h5>No search result for : <b>{{query}}</b></h5>
 <h5>Try different keywords</h5>
 {% else %}
+<div class='container my-3' style="height: 115vh;">
 {%for blog in blogs%}
 
   <div class="my-4 p-3 border">
@@ -36,5 +37,5 @@ Search Results
 </div>
 </div>
 {% endif %}
-
+</div>
 {% endblock body %}
