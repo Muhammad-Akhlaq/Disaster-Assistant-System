@@ -10,7 +10,10 @@ My Blogs
 <div class="container">
   <h2 class="text-center my-3">My BLog</h2>
   {% if blogs|length < 1 %}
-  <h3>You haven't written any blog yet.</h3>
+  <div style="text-align: center;padding-bottom: 10px;">
+  <h4>You haven't written any blog yet.</h4>
+  <a class="btn btn-primary btn-lg" href="/blogwrite" role="button">Write BLog</a>
+</div>
   {% else %}
   {% for blog in blogs %} 
   <div class="my-4 p-3 border">
