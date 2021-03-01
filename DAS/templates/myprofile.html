@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block adminactive %}active{% endblock adminactive %}
+{% block title %}
+Profile
+{% endblock title %}
+
+
+{% block additional_styles %}
+<style>
+
+img {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.a{
+  text-align: center;
+}
+
+
+</style>
+{% endblock additional_styles %}
+
+
+{% block body %}
+
+<div class="my-5 mx-5">
+
+<img src="https://source.unsplash.com/200x200/?human,boy,girl" alt="Avatar">
+
+<div class="a py-2">
+<h5>{{request.user.first_name}}
+{{request.user.last_name}}
+</h5>
+
+</div>
+<br>
+{{request.user.email}}
+</div>
+
+
+
+
+
+{% endblock body %}

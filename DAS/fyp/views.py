@@ -276,6 +276,11 @@ def signup(request):
     return render(request,'signup.html')
 
 
+def myprofile(request):
+
+    return render(request, 'myprofile.html')
+
+
 def Login(request):
     if request.method=='POST':
         loginusername= request.POST['loginusername']

@@ -73,13 +73,18 @@
       <div class="ml-auto form-inline">
         {% if user.is_authenticated %}
         <ul class="navbar-nav mr-2">
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown {% block adminactive %}{% endblock adminactive %}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
               {{request.user}}
             </a>
             <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item text-light" href="/myprofile/">My Profile</a>
               <a class="dropdown-item text-light" href="/logout/">Logout</a>
             </div>
+
+
+            
+
           </li>
         </ul>
         {% else %}
@@ -119,7 +124,7 @@
 
   <!-- Footer -->
   {% block footer %}
-  <section id="footer"  {% block footerhidden %} {% endblock footerhidden %}>
+  <section id="footer" {% block footerhidden %} {% endblock footerhidden %}>
   {% endblock footer %}
     <div class="container">
       <div class="row text-center text-xs-center text-sm-left text-md-left">
@@ -129,9 +134,6 @@
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-            <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a>
-            </li>
-            <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
           </ul>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4">
@@ -140,9 +142,6 @@
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-            <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a>
-            </li>
-            <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
           </ul>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4">
@@ -151,10 +150,6 @@
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
             <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-            <li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a>
-            </li>
-            <li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i
-                  class="fa fa-angle-double-right"></i>Imprint</a></li>
           </ul>
         </div>
       </div>
