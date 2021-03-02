@@ -23,7 +23,7 @@ Profile
     margin-right: auto;
   }
 
-  .a {
+  .ab {
     text-align: center;
     padding-top: 100px;
   }
@@ -79,8 +79,9 @@ Profile
     margin-right: 200px;
     margin-bottom: 10px;
   }
+
 #div2{
-  display: none;
+  display: {{divs}};
 }
 
 
@@ -103,7 +104,7 @@ Profile
 
 
 
-  <div class="a">
+  <div class="ab">
     <h4>{{user.first_name}}
       {{user.last_name}}
     </h4>
@@ -157,12 +158,18 @@ Profile
 
 
   <div class="editbtn">
-    <a onclick="show1()" class="btn btn-primary">Edit Profile</a>
+    <a onclick="show1()" class="btn btn-primary" role="button" style="color: #fff;">Edit</a>
   </div>
 
 </div>
 
 
+
+
+<!-- 2nd div-->
+
+<form action="/myprofile/{{user.username}}" method="POST">
+{% csrf_token %}
 <div class="abc" id='div2'>
 
   <div class="header">
@@ -175,7 +182,7 @@ Profile
 
 
 
-  <div class="a">
+  <div class="ab">
     <h4>{{user.first_name}}
       {{user.last_name}}
     </h4>
@@ -186,11 +193,10 @@ Profile
   <br>
 
 
-
   <div class="kbio">
     <label>Your Bio</label>
     <div class="bio">
-      <input type="text" {{user.email}}></input>
+    <textarea class="form-control" id="bio" name="bio" rows="1"> {{user.email}}</textarea>
     </div>
   </div>
   <br>
@@ -216,11 +222,10 @@ Profile
 
       <div class="column">
 
-        <input type="text" {{user.username}}></input><br>
-        <input type="text" {{user.first_name}}></input><br>
-        <input type="text" {{user.last_name}}></input><br>
-        <input type="text" {{user.email}}></input>
-
+<textarea class="form-control" id="username" name="username" rows="1">{{user.username}}</textarea><br>
+<textarea class="form-control" id="f_name" name="f_name" rows="1">{{user.first_name}}</textarea><br>
+<textarea class="form-control" id="l_name" name="l_name" rows="1">{{user.last_name}}</textarea><br>
+<textarea class="form-control" id="email" name="email" rows="1">{{user.email}}</textarea>
       </div>
 
 
@@ -229,8 +234,9 @@ Profile
 
 
   <div class="editbtn">
-    <a href="/editprofile" class="btn btn-primary">Save</a>
-    <a onclick="show2()" class="btn btn-primary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+    <a onclick="show2()" class="btn btn-primary" role="button" style="color: #fff;">Cancel</a>
   </div>
 
 </div>
@@ -246,6 +252,8 @@ Profile
     document.getElementById('div2').style.display = 'none';
   }
 </script>
+
+
 
 
 {% endblock body %}

@@ -20,8 +20,7 @@ urlpatterns = [
     path('earthquake/', views.earthquake, name='earthquake'),
     path('flood/', views.flood, name='flood'),
     path('signup/', views.signup, name='signup'),
-    path('myprofile/', views.myprofile, name='myprofile'),
-    path('editprofile/', views.editprofile, name='editprofile'),
+    path('myprofile/<str:username>', views.myprofile, name='myprofile'),
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout')
 

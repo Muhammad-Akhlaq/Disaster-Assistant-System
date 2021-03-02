@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse,redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse,redirect, get_object_or_404,HttpResponseRedirect,reverse
 from fyp.models import Blog, Contact, E_Awareness,F_Awareness
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -277,15 +277,39 @@ def signup(request):
 
 
 
-def myprofile(request):
+def myprofile(request,username):
+    context = {'divs': 'none'}
+    context1 = {'divs': 'block'}
+    if request.method=='POST':
+        user_name= request.POST['username']
+        fname= request.POST['f_name']
+        lname= request.POST['l_name']
+        email= request.POST['email']
+        #pass1= request.POST['pass1']
+        #pass2= request.POST['pass2']
+        if len(user_name) > 10 or len(user_name) < 5:
+            messages.error(request,"Username must be under 5 to 10 characters")
+            return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
+            #return redirect('/myprofile/username',context1)
+        elif user_name.isalnum()==False:
+            messages.error(request,"Username should only contain letters and numbers")
+            return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
+        #if pass1 != pass2:
+        #    messages.error(request,"Passwords do not match")
+        #   return redirect('/myprofile',context)
+        else:
+            #User.objects.filter(username=username).update(username=username, first_name=fname, last_name=lname,email=email)
+            user = User.objects.get(username=username)
+            user.username = user_name
+            user.first_name = fname
+            user.last_name = lname
+            user.email = email
+            user.save()
+            messages.error(request,"Profile successfully Updated!")
+            return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
+    return render(request, 'myprofile.html',context)
 
-    return render(request, 'myprofile.html')
 
-
-
-def editprofile(request):
-
-    return render(request, 'editprofile.html')
 
 #def update_profile(request, user_id):
 #    user = User.objects.get(pk=user_id)
