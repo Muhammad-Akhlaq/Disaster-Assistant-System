@@ -21,6 +21,7 @@ urlpatterns = [
     path('flood/', views.flood, name='flood'),
     path('signup/', views.signup, name='signup'),
     path('myprofile/', views.myprofile, name='myprofile'),
+    path('editprofile/', views.editprofile, name='editprofile'),
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout')
 

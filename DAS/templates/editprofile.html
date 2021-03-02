@@ -79,9 +79,7 @@ Profile
     margin-right: 200px;
     margin-bottom: 10px;
   }
-#div2{
-  display: none;
-}
+
 
 
 </style>
@@ -91,7 +89,7 @@ Profile
 {% block body %}
 
 
-<div class="abc" id='div1'>
+<div class="abc">
 
   <div class="header">
 
@@ -157,95 +155,12 @@ Profile
 
 
   <div class="editbtn">
-    <a onclick="show1()" class="btn btn-primary">Edit Profile</a>
+    <a href="/editprofile" class="btn btn-primary">Edit Profile</a>
   </div>
 
 </div>
 
 
-<div class="abc" id='div2'>
-
-  <div class="header">
-
-
-    <div>
-      <img src="https://source.unsplash.com/200x200/?human,boy,girl" alt="Avatar">
-    </div>
-  </div>
-
-
-
-  <div class="a">
-    <h4>{{user.first_name}}
-      {{user.last_name}}
-    </h4>
-
-  </div>
-
-
-  <br>
-
-
-
-  <div class="kbio">
-    <label>Your Bio</label>
-    <div class="bio">
-      <input type="text" {{user.email}}></input>
-    </div>
-  </div>
-  <br>
-
-
-
-  <div class="kbio">
-    <label>Your Info</label>
-
-
-    <div class="row">
-
-      <div class="column">
-
-        <h6>Username:</h6>
-        <h6>First Name:</h6>
-        <h6>Last Name:</h6>
-        <h6>E-mail:</h6>
-
-      </div>
-
-
-
-      <div class="column">
-
-        <input type="text" {{user.username}}></input><br>
-        <input type="text" {{user.first_name}}></input><br>
-        <input type="text" {{user.last_name}}></input><br>
-        <input type="text" {{user.email}}></input>
-
-      </div>
-
-
-    </div>
-  </div>
-
-
-  <div class="editbtn">
-    <a href="/editprofile" class="btn btn-primary">Save</a>
-    <a onclick="show2()" class="btn btn-primary">Cancel</a>
-  </div>
-
-</div>
-
-
-<script>
-  function show1(){
-    document.getElementById('div1').style.display = 'none';
-    document.getElementById('div2').style.display = 'block';
-  }
-  function show2(){
-    document.getElementById('div1').style.display = 'block';
-    document.getElementById('div2').style.display = 'none';
-  }
-</script>
 
 
 {% endblock body %}

@@ -276,9 +276,24 @@ def signup(request):
     return render(request,'signup.html')
 
 
+
 def myprofile(request):
 
     return render(request, 'myprofile.html')
+
+
+
+def editprofile(request):
+
+    return render(request, 'editprofile.html')
+
+#def update_profile(request, user_id):
+#    user = User.objects.get(pk=user_id)
+#    user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
+#    user.save()
+
+#    return render(request, 'myprofile.html')
+
 
 
 def Login(request):
@@ -303,3 +318,5 @@ def Logout(request):
     messages.success(request,"Successfully logged out")
     return redirect("/")
     
+
+
