@@ -52,10 +52,8 @@ def news(request):
     return render(request, 'news.html')
 
 def events(request):
-    df = pd.read_excel('static/c.xls')
-    E_data=df.head()
-    context={'paangi':E_data}
-    return render(request, 'events.html',context)
+    
+    return render(request, 'events.html')
 
 
 
@@ -278,8 +276,6 @@ def signup(request):
 
 
 def myprofile(request,username):
-    context = {'divs': 'none'}
-    context1 = {'divs': 'block'}
     if request.method=='POST':
         user_name= request.POST['username']
         fname= request.POST['f_name']
@@ -290,15 +286,12 @@ def myprofile(request,username):
         if len(user_name) > 10 or len(user_name) < 5:
             messages.error(request,"Username must be under 5 to 10 characters")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
-            #return redirect('/myprofile/username',context1)
         elif user_name.isalnum()==False:
             messages.error(request,"Username should only contain letters and numbers")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
         #if pass1 != pass2:
         #    messages.error(request,"Passwords do not match")
-        #   return redirect('/myprofile',context)
         else:
-            #User.objects.filter(username=username).update(username=username, first_name=fname, last_name=lname,email=email)
             user = User.objects.get(username=username)
             user.username = user_name
             user.first_name = fname
@@ -307,16 +300,7 @@ def myprofile(request,username):
             user.save()
             messages.error(request,"Profile successfully Updated!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
-    return render(request, 'myprofile.html',context)
-
-
-
-#def update_profile(request, user_id):
-#    user = User.objects.get(pk=user_id)
-#    user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
-#    user.save()
-
-#    return render(request, 'myprofile.html')
+    return render(request, 'myprofile.html')
 
 
 
