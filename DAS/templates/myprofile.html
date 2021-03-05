@@ -98,7 +98,7 @@ Profile
 
 
     <div>
-      <img src="{{profile.files.url}}" alt="Avatar" width="200" height="200">
+      <img src="{{profile.files.url|default_if_none:'#'}}" alt="Avatar" width="200" height="200">
     </div>
   </div>
 
@@ -176,7 +176,7 @@ Profile
 
 
     <div>
-      <img src="{{profile.files.url}}" alt="Avatar" width="200" height="200">
+      <img src="{{profile.files.url|default_if_none:'#'}}" alt="Avatar" width="200" height="200">
     </div>
   </div>
 

@@ -282,10 +282,12 @@ def signup(request):
 
 def myprofile(request,username):
     user = User.objects.get(username=username)
-    print(user.username)
-    print(user.id)
-    profile = UserProfile.objects.get(user=user.id)
-    print(profile.bio)
+    try:
+        profile = UserProfile.objects.get(user=user.id)
+        print("try")
+    except:
+        profile = UserProfile.objects.create(user=request.user,bio='',files="avater.png")
+        print("except")
     context = {'profile':profile}
     if request.method=='POST':
         user_name= request.POST['username']
