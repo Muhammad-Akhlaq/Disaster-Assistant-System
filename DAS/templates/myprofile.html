@@ -81,7 +81,7 @@ Profile
   }
 
 #div2{
-  display: {{divs}};
+  display: none;
 }
 
 
@@ -98,7 +98,7 @@ Profile
 
 
     <div>
-      <img src="https://source.unsplash.com/200x200/?human,boy,girl" alt="Avatar">
+      <img src="{{profile.files.url}}" alt="Avatar" width="200" height="200">
     </div>
   </div>
 
@@ -119,7 +119,7 @@ Profile
   <div class="kbio">
     <label>Your Bio</label>
     <div class="bio">
-      <p>asdfsjhef ashd </p>
+      <p>{{profile.bio}} </p>
     </div>
   </div>
   <br>
@@ -176,7 +176,7 @@ Profile
 
 
     <div>
-      <img src="https://source.unsplash.com/200x200/?human,boy,girl" alt="Avatar">
+      <img src="{{profile.files.url}}" alt="Avatar" width="200" height="200">
     </div>
   </div>
 
@@ -196,7 +196,7 @@ Profile
   <div class="kbio">
     <label>Your Bio</label>
     <div class="bio">
-    <textarea class="form-control" id="bio" name="bio" rows="1"> {{user.email}}</textarea>
+    <textarea class="form-control" id="bio" name="bio" rows="1"> {{profile.bio}}</textarea>
     </div>
   </div>
   <br>
@@ -215,6 +215,8 @@ Profile
         <h6>First Name:</h6>
         <h6>Last Name:</h6>
         <h6>E-mail:</h6>
+        <h6>Password:</h6>
+        <h6>Confirm Password:</h6>
 
       </div>
 
@@ -225,7 +227,9 @@ Profile
 <textarea class="form-control" id="username" name="username" rows="1">{{user.username}}</textarea><br>
 <textarea class="form-control" id="f_name" name="f_name" rows="1">{{user.first_name}}</textarea><br>
 <textarea class="form-control" id="l_name" name="l_name" rows="1">{{user.last_name}}</textarea><br>
-<textarea class="form-control" id="email" name="email" rows="1">{{user.email}}</textarea>
+<textarea class="form-control" id="email" name="email"  rows="1">{{user.email}}</textarea><br>
+<textarea class="form-control" id="pass1" name="pass1" type="Password" rows="1"></textarea><br>
+<textarea class="form-control" id="pass2" name="pass2" type="Password" rows="1"></textarea>
       </div>
 
 

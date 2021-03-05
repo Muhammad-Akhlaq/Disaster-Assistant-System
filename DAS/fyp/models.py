@@ -58,3 +58,14 @@ class F_Awareness(models.Model):
 #@receiver(post_save, sender=User)
 #def save_user_profile(sender, instance, **kwargs):
 #    instance.profile.save()
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    bio = models.CharField(max_length=200,default="")
+    files = models.FileField(default='')
+
+
+    def __str__(self):
+        return self.user.username
+    

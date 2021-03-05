@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse,redirect, get_object_or_404,HttpResponseRedirect,reverse
-from fyp.models import Blog, Contact, E_Awareness,F_Awareness
+from fyp.models import Blog, Contact, E_Awareness,F_Awareness, UserProfile
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
@@ -276,31 +276,42 @@ def signup(request):
 
 
 def myprofile(request,username):
+    user = User.objects.get(username=username)
+    print(user.username)
+    print(user.id)
+    profile = UserProfile.objects.get(user=user.id)
+    print(profile.bio)
+    context = {'profile':profile}
     if request.method=='POST':
         user_name= request.POST['username']
+        bio = request.POST['bio']
         fname= request.POST['f_name']
         lname= request.POST['l_name']
         email= request.POST['email']
-        #pass1= request.POST['pass1']
-        #pass2= request.POST['pass2']
+        pass1= request.POST['pass1']
+        pass2= request.POST['pass2']
         if len(user_name) > 10 or len(user_name) < 5:
             messages.error(request,"Username must be under 5 to 10 characters")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
         elif user_name.isalnum()==False:
             messages.error(request,"Username should only contain letters and numbers")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
-        #if pass1 != pass2:
-        #    messages.error(request,"Passwords do not match")
+        if pass1 != pass2:
+            messages.error(request,"Passwords do not match")
+            return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
         else:
             user = User.objects.get(username=username)
             user.username = user_name
             user.first_name = fname
             user.last_name = lname
             user.email = email
+            #user.password = pass1
             user.save()
+            profile.bio = bio
+            profile.save()
             messages.error(request,"Profile successfully Updated!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
-    return render(request, 'myprofile.html')
+    return render(request, 'myprofile.html',context)
 
 
 
@@ -327,4 +338,6 @@ def Logout(request):
     return redirect("/")
     
 
+def aboutus(request):
 
+    return render(request, 'aboutus.html')
