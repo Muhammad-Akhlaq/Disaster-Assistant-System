@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 def home(request):
@@ -286,7 +287,7 @@ def myprofile(request,username):
         profile = UserProfile.objects.get(user=user.id)
         print("try")
     except:
-        profile = UserProfile.objects.create(user=request.user,bio='',files="avater.png")
+        profile = UserProfile.objects.create(user=request.user,bio="",files="avater.png")
         print("except")
     context = {'profile':profile}
     if request.method=='POST':
@@ -298,13 +299,16 @@ def myprofile(request,username):
         pass1= request.POST['pass1']
         pass2= request.POST['pass2']
         if len(user_name) > 10 or len(user_name) < 5:
-            messages.error(request,"Username must be under 5 to 10 characters")
+            messages.error(request,"Username must be under 5 to 10 characters!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
         elif user_name.isalnum()==False:
-            messages.error(request,"Username should only contain letters and numbers")
+            messages.error(request,"Username should only contain letters and numbers!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
-        if pass1 != pass2:
-            messages.error(request,"Passwords do not match")
+        #elif user.password != old_pass:
+        #    messages.error(request,"Old Password is incorrect!")
+        #    return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
+        elif pass1 != pass2:
+            messages.error(request,"Passwords do not match!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
         else:
             user = User.objects.get(username=username)
@@ -312,12 +316,16 @@ def myprofile(request,username):
             user.first_name = fname
             user.last_name = lname
             user.email = email
-            #user.password = pass1
+            user.set_password(str(pass1))
+            login(request,user)
             user.save()
             profile.bio = bio
             profile.save()
             messages.error(request,"Profile successfully Updated!")
-            return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
+            try:
+                return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
+            except:
+                return redirect('myprofile', username=user_name)
     return render(request, 'myprofile.html',context)
 
 

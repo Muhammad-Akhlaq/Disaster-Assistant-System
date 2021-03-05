@@ -4,7 +4,13 @@
 Disaster awareness
 {% endblock title %}
 {% block awarenessactive %}active{% endblock awarenessactive %}
-
+{% block additional_styles %}
+<style>
+  .card {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+</style>
+{% endblock additional_styles %}
 {% block body %}
 
 <!-- carousel -->
