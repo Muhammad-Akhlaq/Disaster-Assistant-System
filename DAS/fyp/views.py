@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 import math
-import json 
+import json, requests
 import urllib.request
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -48,8 +48,13 @@ def estimation(request):
 
 
 def news(request):
-
-    return render(request, 'news.html')
+    response = requests.get(url = "https://api.reliefweb.int/v1/reports?appname=apidoc&limit=1000")
+    news = response.json()
+    titles=[]
+    for i in range(0,1000):
+        titles.append(news['data'][i]['fields']['title'])
+    context = {'news':titles}
+    return render(request, 'news.html',context)
 
 def events(request):
     

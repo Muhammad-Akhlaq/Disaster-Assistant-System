@@ -5,8 +5,11 @@ News
 {% endblock title %}
 {% block body %} 
     
-    <h2> news </h2>
+    <h2 style='text-align:center;'> Latest News </h2>
+{% for title in news %}
+<p>Title: {{title}}</p>
 
+{% endfor %}
 
     
     
