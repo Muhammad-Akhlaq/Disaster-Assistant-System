@@ -12,6 +12,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from django.contrib.auth import update_session_auth_hash
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
 def home(request):
@@ -292,6 +293,7 @@ def myprofile(request,username):
     context = {'profile':profile}
     if request.method=='POST':
         user_name= request.POST['username']
+        photo = request.FILES['profile']
         bio = request.POST['bio']
         fname= request.POST['f_name']
         lname= request.POST['l_name']
@@ -319,6 +321,9 @@ def myprofile(request,username):
             user.set_password(str(pass1))
             login(request,user)
             user.save()
+            fs = FileSystemStorage()
+            fs.save(photo.name, photo)
+            profile.files = photo.name
             profile.bio = bio
             profile.save()
             messages.error(request,"Profile successfully Updated!")

@@ -77,16 +77,14 @@ Profile
   }
 
   .editbtn {
-    text-align:right;
+    text-align: right;
     margin-right: 200px;
     margin-bottom: 10px;
   }
 
-#div2{
-  display: none;
-}
-
-
+  #div2 {
+    display: none;
+  }
 </style>
 {% endblock additional_styles %}
 
@@ -170,90 +168,95 @@ Profile
 
 <!-- 2nd div-->
 
-<form action="/myprofile/{{user.username}}" method="POST">
-{% csrf_token %}
-<div class="abc" id='div2'>
+<form action="/myprofile/{{user.username}}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="abc" id='div2'>
 
-  <div class="header">
+    <div class="header">
 
 
-    <div>
-      <img src="{{profile.files.url|default_if_none:'#'}}" alt="Avatar" width="200" height="200">
+      <div>
+        <img src="{{profile.files.url|default_if_none:'#'}}" alt="Avatar" width="200" height="200">
+          
+      </div>
+      
     </div>
-  </div>
 
 
 
-  <div class="ab">
-    <h4>{{user.first_name}}
-      {{user.last_name}}
-    </h4>
+    <div class="ab">
+      <h4>{{user.first_name}}
+        {{user.last_name}}
+      </h4>
 
-  </div>
-
-
-  <br>
-
-
-  <div class="kbio">
-    <label>Your Bio</label>
-    <div class="bio">
-    <textarea class="form-control" id="bio" name="bio" placeholder="Write something about you." rows="1"> {{profile.bio}}</textarea>
     </div>
-  </div>
-  <br>
+
+
+    <br>
+
+
+    <div class="kbio">
+      <label>Your Bio</label>
+      <div class="bio">
+        <textarea class="form-control" id="bio" name="bio" placeholder="Write something about you."
+          rows="1"> {{profile.bio}}</textarea>
+      </div>
+    </div>
+    <br>
+    <input type="file" name="profile" title="Upload Image" style="cursor: pointer;">
+
+
+    <div class="kbio">
+      <label>Your Info</label>
+
+
+      <div class="row">
+
+        <div class="column">
+          <h6>Username:</h6><br>
+          <h6>First Name:</h6><br>
+          <h6>Last Name:</h6><br>
+          <h6>E-mail:</h6><br>
+          <h6>Old Password:</h6><br>
+          <h6>New Password:</h6><br>
+          <h6>Confirm Password:</h6>
+
+        </div>
 
 
 
-  <div class="kbio">
-    <label>Your Info</label>
+        <div class="column">
+          <textarea class="form-control" id="username" name="username" rows="1">{{user.username}}</textarea><br>
+          <textarea class="form-control" id="f_name" name="f_name" rows="1">{{user.first_name}}</textarea><br>
+          <textarea class="form-control" id="l_name" name="l_name" rows="1">{{user.last_name}}</textarea><br>
+          <textarea class="form-control" id="email" name="email" rows="1">{{user.email}}</textarea><br>
+          <!--<textarea class="form-control" id="old_pass" name="old_pass" type="Password" placeholder="Enter Old password" rows="1"></textarea><br>-->
+          <input class="form-control" id="pass1" name="pass1" type="Password" placeholder="Enter New password"
+            rows="1"></textarea><br>
+          <input class="form-control" id="pass2" name="pass2" type="Password" placeholder="Confirm password"
+            rows="1"></textarea>
+        </div>
 
-
-    <div class="row">
-
-      <div class="column">
-        <h6>Username:</h6><br>
-        <h6>First Name:</h6><br>
-        <h6>Last Name:</h6><br>
-        <h6>E-mail:</h6><br>
-        <h6>Old Password:</h6><br>
-        <h6>New Password:</h6><br>
-        <h6>Confirm Password:</h6>
 
       </div>
-
-
-
-      <div class="column">
-<textarea class="form-control" id="username" name="username" rows="1">{{user.username}}</textarea><br>
-<textarea class="form-control" id="f_name" name="f_name" rows="1">{{user.first_name}}</textarea><br>
-<textarea class="form-control" id="l_name" name="l_name" rows="1">{{user.last_name}}</textarea><br>
-<textarea class="form-control" id="email" name="email"  rows="1">{{user.email}}</textarea><br>
-<!--<textarea class="form-control" id="old_pass" name="old_pass" type="Password" placeholder="Enter Old password" rows="1"></textarea><br>-->
-<input class="form-control" id="pass1" name="pass1" type="Password" placeholder="Enter New password" rows="1"></textarea><br>
-<input class="form-control" id="pass2" name="pass2" type="Password" placeholder="Confirm password" rows="1"></textarea>
-      </div>
-
-
     </div>
-  </div>
 
 
-  <div class="editbtn">
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div class="editbtn">
+      <button type="submit" class="btn btn-primary">Save</button>
 </form>
-    <a onclick="show2()" class="btn btn-primary" role="button" style="color: #fff;">Cancel</a>
-  </div>
+<a onclick="show2()" class="btn btn-primary" role="button" style="color: #fff;">Cancel</a>
+</div>
 
 </div>
 
 
 <script>
-  function show1(){
+  function show1() {
     document.getElementById('div1').style.display = 'none';
     document.getElementById('div2').style.display = 'block';
   }
-  function show2(){
+  function show2() {
     document.getElementById('div1').style.display = 'block';
     document.getElementById('div2').style.display = 'none';
   }
