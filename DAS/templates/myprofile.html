@@ -119,7 +119,7 @@ Profile
   <div class="kbio">
     <label>Your Bio</label>
     <div class="bio">
-      <p aria-placeholder="Write something about you.">{{profile.bio}} </p>
+      <p>{{profile.bio}} </p>
     </div>
   </div>
   <br>
@@ -197,13 +197,21 @@ Profile
 
     <div class="kbio">
       <label>Your Bio</label>
-      <div class="bio">
+      <div class="bio" style="margin-bottom: 5px;">
         <textarea class="form-control" id="bio" name="bio" placeholder="Write something about you."
           rows="1"> {{profile.bio}}</textarea>
       </div>
     </div>
     <br>
-    <input type="file" name="profile" title="Upload Image" style="cursor: pointer;">
+
+    <div class="kbio">
+      <label>Profile Image</label>
+      <div class="bio" style="margin-left: 10px;margin-bottom: 5px;margin-top: 8px;">
+        <input type="file" name="profile" title="Upload Image" style="cursor: pointer;">
+      </div>
+    </div>
+    <br>
+    
 
 
     <div class="kbio">
@@ -212,12 +220,11 @@ Profile
 
       <div class="row">
 
-        <div class="column">
+        <div class="column" style="margin-top: 15px;">
           <h6>Username:</h6><br>
           <h6>First Name:</h6><br>
           <h6>Last Name:</h6><br>
           <h6>E-mail:</h6><br>
-          <h6>Old Password:</h6><br>
           <h6>New Password:</h6><br>
           <h6>Confirm Password:</h6>
 
@@ -230,7 +237,6 @@ Profile
           <textarea class="form-control" id="f_name" name="f_name" rows="1">{{user.first_name}}</textarea><br>
           <textarea class="form-control" id="l_name" name="l_name" rows="1">{{user.last_name}}</textarea><br>
           <textarea class="form-control" id="email" name="email" rows="1">{{user.email}}</textarea><br>
-          <!--<textarea class="form-control" id="old_pass" name="old_pass" type="Password" placeholder="Enter Old password" rows="1"></textarea><br>-->
           <input class="form-control" id="pass1" name="pass1" type="Password" placeholder="Enter New password"
             rows="1"></textarea><br>
           <input class="form-control" id="pass2" name="pass2" type="Password" placeholder="Confirm password"

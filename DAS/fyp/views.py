@@ -48,14 +48,24 @@ def estimation(request):
     return render(request, 'estimation.html',context)
 
 
-
+import itertools
 def news(request):
-    response = requests.get(url = "https://api.reliefweb.int/v1/reports?appname=apidoc&limit=1000")
+    response = requests.get(url = "https://api.reliefweb.int/v1/reports?appname=apidoc&limit=10")
     news = response.json()
     titles=[]
-    for i in range(0,1000):
-        titles.append(news['data'][i]['fields']['title'])
-    context = {'news':titles}
+    body=[]
+    country=[]
+    date=[]
+    for i in range(0,10):
+        titles.append(str(news['data'][i]['fields']['title']))
+        detail=news['data'][i]['href']
+        response = requests.get(url = detail)
+        new_detail = response.json()
+        body.append(new_detail['data'][0]['fields']['body-html'])
+        country.append(new_detail['data'][0]['fields']['country'][0]['name'])
+        date.append(str(new_detail['data'][0]['fields']['date']['created']))
+    data = itertools.zip_longest(body,titles, country, date)
+    context = {'data':data}
     return render(request, 'news.html',context)
 
 def events(request):
@@ -286,10 +296,8 @@ def myprofile(request,username):
     user = User.objects.get(username=username)
     try:
         profile = UserProfile.objects.get(user=user.id)
-        print("try")
     except:
         profile = UserProfile.objects.create(user=request.user,bio="",files="avater.png")
-        print("except")
     context = {'profile':profile}
     if request.method=='POST':
         user_name= request.POST['username']
@@ -306,9 +314,6 @@ def myprofile(request,username):
         elif user_name.isalnum()==False:
             messages.error(request,"Username should only contain letters and numbers!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
-        #elif user.password != old_pass:
-        #    messages.error(request,"Old Password is incorrect!")
-        #    return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))
         elif pass1 != pass2:
             messages.error(request,"Passwords do not match!")
             return HttpResponseRedirect(reverse("myprofile", args=[request.user.username]))

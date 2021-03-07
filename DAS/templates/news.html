@@ -3,14 +3,21 @@
 {% block title %}
 News
 {% endblock title %}
-{% block body %} 
-    
-    <h2 style='text-align:center;'> Latest News </h2>
-{% for title in news %}
-<p>Title: {{title}}</p>
+{% block body %}
 
+<h2 style='text-align:center;'> Latest News </h2>
+{% for body,titles,countrys,date in data %}
+<div class="my-4 p-3 border">
+    <p class="mb-0 "> Country by {{countrys}}</p>
+    <p class="mb-0 "> Date by {{date}}</p>
+    <h4>{{titles}}</h4>
+    <p>{{body|safe|slice:200}}...</p>
+    <a href="/blogpost/{{blog.slug}}" class="text-dark">
+        <h5 style="color: blue;">Read More...</h5>
+    </a>
+</div>
 {% endfor %}
 
-    
-    
+
+
 {% endblock body %}
