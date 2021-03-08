@@ -50,6 +50,7 @@ def estimation(request):
 
 import itertools
 def news(request):
+    '''
     response = requests.get(url = "https://api.reliefweb.int/v1/reports?appname=apidoc&limit=10")
     news = response.json()
     titles=[]
@@ -66,7 +67,29 @@ def news(request):
         date.append(str(new_detail['data'][0]['fields']['date']['created']))
     data = itertools.zip_longest(body,titles, country, date)
     context = {'data':data}
+    return render(request, 'news.html',context)'''
+    response = requests.get(url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2020-01-01&endtime=2021-01-02&minmagnitude=4"
+)
+    data = response.json()
+    titles=[]
+    place=[]
+    time=[]
+    mag=[]
+    coordinates=[]
+    for i in range(0,10):
+        titles.append(data['features'][0]['properties']['title'])
+        place.append(data['features'][0]['properties']['place'])
+        time.append(data['features'][0]['properties']['time'])
+        mag.append(data['features'][0]['properties']['mag'])
+        mag.append(data['features'][0]['geometry']['coordinates'])
+
+
+
+    data = itertools.zip_longest(titles, place,time,mag,coordinates)
+    context = {'data':data}
     return render(request, 'news.html',context)
+
+
 
 def events(request):
     

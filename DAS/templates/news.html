@@ -6,16 +6,26 @@ News
 {% block body %}
 
 <h2 style='text-align:center;'> Latest News </h2>
-{% for body,titles,countrys,date in data %}
+{% for titles, place,time,mag,coordinates in data %}
 <div class="my-4 p-3 border">
-    <p class="mb-0 "> Country by {{countrys}}</p>
-    <p class="mb-0 "> Date by {{date}}</p>
+    <p class="mb-0 "> Place: {{place}}</p>
     <h4>{{titles}}</h4>
+    <p class="mb-0 "> Time: {{time}}</p>
+    <p class="mb-0 "> Magnitude: {{mag}}</p>
+    <p class="mb-0 "> coordinates: {{coordinates}}</p>
+
+  <!--
+
+    <p class="mb-0 "> Date by {{date}}</p>
     <p>{{body|safe|slice:200}}...</p>
+  -->
     <a href="/blogpost/{{blog.slug}}" class="text-dark">
         <h5 style="color: blue;">Read More...</h5>
     </a>
 </div>
+
+
+
 {% endfor %}
 
 
