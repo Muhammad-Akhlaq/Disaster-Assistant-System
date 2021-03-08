@@ -77,11 +77,11 @@ def news(request):
     mag=[]
     coordinates=[]
     for i in range(0,10):
-        titles.append(data['features'][0]['properties']['title'])
-        place.append(data['features'][0]['properties']['place'])
-        time.append(data['features'][0]['properties']['time'])
-        mag.append(data['features'][0]['properties']['mag'])
-        mag.append(data['features'][0]['geometry']['coordinates'])
+        titles.append(data['features'][i]['properties']['title'])
+        place.append(data['features'][i]['properties']['place'])
+        time.append(data['features'][i]['properties']['time'])
+        mag.append(data['features'][i]['properties']['mag'])
+        mag.append(data['features'][i]['geometry']['coordinates'])
 
 
 
