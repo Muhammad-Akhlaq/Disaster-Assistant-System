@@ -76,16 +76,22 @@ def news(request):
     time=[]
     mag=[]
     coordinates=[]
+    url=[]
+    alert=[]
+    magType=[]
     for i in range(0,10):
         titles.append(data['features'][i]['properties']['title'])
         place.append(data['features'][i]['properties']['place'])
         time.append(data['features'][i]['properties']['time'])
         mag.append(data['features'][i]['properties']['mag'])
-        mag.append(data['features'][i]['geometry']['coordinates'])
+        coordinates.append(data['features'][i]['geometry']['coordinates'])
+        url.append(data['features'][i]['properties']['url'])
+        alert.append(data['features'][i]['properties']['alert'])
+        magType.append(data['features'][i]['properties']['magType'])
 
 
 
-    data = itertools.zip_longest(titles, place,time,mag,coordinates)
+    data = itertools.zip_longest(titles, place,time,mag,coordinates,url,alert,magType)
     context = {'data':data}
     return render(request, 'news.html',context)
 
