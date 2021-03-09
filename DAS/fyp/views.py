@@ -97,9 +97,11 @@ def news(request):
 
 
 
-def events(request):
-    
-    return render(request, 'events.html')
+def events(request,type):
+    context = {'display2':'none','display':'block'}
+    if type=='Earthquake':
+        context = {'display2':'block','display':'none'}
+    return render(request, 'events.html',context)
 
 
 

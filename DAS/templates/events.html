@@ -3,11 +3,30 @@
 {% block title %}
 Events
 {% endblock title %}
+
+{% block additional_styles %}
+<style>
+   #div1 {
+    display: {{display}};
+   }
+   #div2 {
+    display: {{display2}};
+   }
+</style>
+{% endblock additional_styles %}
 {% block body %}
-   <h3 style="text-align: center;margin: 3px;">Previous Events</h3> 
+<!--Flood Events-->
+<div class="abc" id='div1'>
+   <h3 style="text-align: center;margin: 3px;">Flood Events</h3> 
 <div style="margin-left: 90px;margin-right: 90px;">
 <iframe width="100%" height="800" frameborder="0" scrolling="no" src="https://onedrive.live.com/embed?resid=EDCAC11E20956767%21431&authkey=%21AGkwst8aJtwnYtM&em=2&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True"></iframe>
 </div>
- 
+</div>
+<!--Earthquake Events-->
+<div class="abc" id='div2'>
+   <h3 style="text-align: center;margin: 3px;">Earthquake Events</h3> 
+<div style="margin-left: 90px;margin-right: 90px;">
+   <iframe width="100%" height="800" frameborder="0" scrolling="no" src="https://onedrive.live.com/embed?resid=EDCAC11E20956767%21435&authkey=%21ABWII62LoVw83Vo&em=2&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True"></iframe></div>
+</div>
 
 {% endblock body %}

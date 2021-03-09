@@ -52,11 +52,15 @@
         <li class="nav-item {% block newsactive %}{% endblock newsactive %}">
           <a class="nav-link" href="/news">NEWS</a>
         </li>
-
-        <li class="nav-item {% block eventsactive %}{% endblock eventsactive %}">
-          <a class="nav-link" href="/events">Events</a>
+        <li class="nav-item dropdown {% block eventsactive %}{% endblock eventsactive %}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+            Events
+          </a>
+          <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-light" href="/events/Flood">Flood</a>
+            <a class="dropdown-item text-light" href="/events/Earthquake">Earthquake</a>
+          </div>
         </li>
-
         <li class="nav-item {% block weatheractive %}{% endblock weatheractive %}">
           <a class="nav-link" href="/weather">Weather</a>
         </li>
