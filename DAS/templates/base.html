@@ -21,25 +21,31 @@
   <!------ Include the above in your HEAD tag ---------->
 
   <script src="{% static '/blog.js' %}"></script>
-
+<style>
+  ul{
+    float:right;
+  }
+  il{
+    float:right
+  }
+</style>
   {% block additional_styles %}
   {% endblock %}
   <title>{% block title %} {% endblock title %}</title>
-
 </head>
 
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">DAS</a>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+    <a class="navbar-brand" href="/">Disaster Assistance System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav">
 
         <li class="nav-item {% block awarenessactive %}{% endblock awarenessactive %}">
           <a class="nav-link" href="/awareness">Awareness<span class="sr-only">(current)</span></a>
@@ -56,7 +62,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
             Events
           </a>
-          <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" style="background-color: black;" aria-labelledby="navbarDropdown">
             <a class="dropdown-item text-light" href="/events/Flood">Flood</a>
             <a class="dropdown-item text-light" href="/events/Earthquake">Earthquake</a>
           </div>
@@ -81,7 +87,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
               {{request.user}}
             </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" style="background-color: black;"  aria-labelledby="navbarDropdown">
               <a class="dropdown-item text-light" href="/myprofile/{{user.username}}">My Profile</a>
               <a class="dropdown-item text-light" href="/logout/">Logout</a>
             </div>
@@ -100,8 +106,8 @@
         </li>
         {% endif %}
       </div>
+    </ul>
     </div>
-      </ul>
   </nav>
 
 

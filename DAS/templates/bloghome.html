@@ -13,7 +13,7 @@ Blogs
 {% endblock css %}
 {% block search %}
 <div class="ml-auto form-inline">
-  <form action='/search' method='get' class=" my-2 mx-3 my-lg-0">
+  <form action='/search' method='get'>
     <input class="form-control mr-sm-2" type="search" name="query" id="query" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
   </form>
@@ -25,7 +25,7 @@ Blogs
 
 <div class="container">
 
-  <div class="jumbotron">
+  <div class="jumbotron" style="box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10); margin-top:20px">
     <h1 class="display-4 ">Welcome to the Blogs</h1>
     <p class="lead">Explore blogs on the topics of Artificial Intelligence and Disaster Management. Here you can also write your own blogs so other people can read and share.</p>
     <hr class="my-4">
@@ -43,7 +43,7 @@ Blogs
   {% for blog in blogs %}
 
 
-  <div class="my-4 p-3 border">
+  <div class="my-4 p-3 border" style="box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10);">
     <p class="mb-0 "> Article by <a href="#">{{blog.author}}</a></p>
     <h4 class="text-dark"> <a href="/blogpost/{{blog.slug}}" class="text-dark">{{blog.title}}</a></h4>
     <div>
