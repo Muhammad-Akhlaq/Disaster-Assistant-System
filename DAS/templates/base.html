@@ -21,14 +21,6 @@
   <!------ Include the above in your HEAD tag ---------->
 
   <script src="{% static '/blog.js' %}"></script>
-<style>
-  ul{
-    float:right;
-  }
-  il{
-    float:right
-  }
-</style>
   {% block additional_styles %}
   {% endblock %}
   <title>{% block title %} {% endblock title %}</title>
@@ -47,17 +39,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
 
+
         <li class="nav-item {% block awarenessactive %}{% endblock awarenessactive %}">
           <a class="nav-link" href="/awareness">Awareness<span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item {% block blogactive %}{% endblock blogactive %} ">
-          <a class="nav-link" href="/bloghome">Blog</a>
-        </li>
-
+        
         <li class="nav-item {% block newsactive %}{% endblock newsactive %}">
           <a class="nav-link" href="/news">NEWS</a>
         </li>
+
+
+        <li class="nav-item {% block weatheractive %}{% endblock weatheractive %}">
+          <a class="nav-link" href="/weather">Weather</a>
+        </li>
+
+
+        <li class="nav-item {% block estimationactive %}{% endblock estimationactive %} ">
+          <a class="nav-link" href="/estimation">Estimation</a>
+        </li>
+
+
         <li class="nav-item dropdown {% block eventsactive %}{% endblock eventsactive %}">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
             Events
@@ -67,19 +69,19 @@
             <a class="dropdown-item text-light" href="/events/Earthquake">Earthquake</a>
           </div>
         </li>
-        <li class="nav-item {% block weatheractive %}{% endblock weatheractive %}">
-          <a class="nav-link" href="/weather">Weather</a>
-        </li>
 
-        <li class="nav-item {% block estimationactive %}{% endblock estimationactive %} ">
-          <a class="nav-link" href="/estimation">Estimation</a>
+
+        <li class="nav-item {% block blogactive %}{% endblock blogactive %} ">
+          <a class="nav-link" href="/bloghome">Blog</a>
         </li>
+        
 
         <li class="nav-item {% block contactactive %}{% endblock contactactive %} ">
           <a class="nav-link" href="/contact">Contact Us</a>
         </li>
+        
 
-      {% block search %}{% endblock search %}
+        {% block search %}{% endblock search %}
       <div class="ml-auto form-inline">
         {% if user.is_authenticated %}
         <ul class="navbar-nav mr-2">
