@@ -159,6 +159,7 @@ def news(request):
 
 
 
+
 def events(request,type):
     context = {'display2':'none','display':'block'}
     if type=='Earthquake':
