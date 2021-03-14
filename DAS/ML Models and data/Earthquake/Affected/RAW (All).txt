@@ -1,0 +1,25 @@
+Earthquake
+
+Classification of deads:-
+=IF(J2<=10,"GREEN",IF(AND(J2>10,J2<=30),"BLUE",IF(AND(J2>30,J2<=50),"YELLOW",IF(AND(J2>50,J2<=100),"ORANGE",IF(J2>100,"RED",J2)))))
+Green(0-10)
+Blue(11-30)
+Yellow(31-50)
+Orange(51-100)
+Red(greater than 101)
+
+Injured:-
+=IF(J2<=20,"GREEN",IF(AND(J2>20,J2<=50),"BLUE",IF(AND(J2>50,J2<=100),"YELLOW",IF(AND(J2>100,J2<=200),"ORANGE",IF(J2>200,"RED",J2)))))
+Green(0-20)
+Blue(21-50)
+Yellow(51-100)
+Orange(101-200)
+Red(greater than 201)
+
+Deads:-
+=IF(D2<=50,"GREEN",IF(AND(D2>50,D2<=100),"BLUE",IF(AND(D2>100,D2<=200),"YELLOW",IF(AND(D2>200,D2<=300),"ORANGE",IF(D2>300,"RED",D2)))))
+Green(0-30)
+Blue(31-50)
+Yellow(51-100)
+Orange(101-200)
+Red(greater than 200)
