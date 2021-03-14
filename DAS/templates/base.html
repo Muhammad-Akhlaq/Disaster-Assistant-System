@@ -55,8 +55,14 @@
         </li>
 
 
-        <li class="nav-item {% block estimationactive %}{% endblock estimationactive %} ">
-          <a class="nav-link" href="/estimation">Estimation</a>
+        <li class="nav-item dropdown {% block estimationactive %}{% endblock estimationactive %} ">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+            Estimation
+          </a>
+          <div class="dropdown-menu" style="background-color: black;" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-light" href="/Estimation_Flood">Flood</a>
+            <a class="dropdown-item text-light" href="/Estimation_Earthquake">Earthquake</a>
+          </div>
         </li>
 
 

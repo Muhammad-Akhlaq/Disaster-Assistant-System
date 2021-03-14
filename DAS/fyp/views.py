@@ -7,10 +7,6 @@ import math
 import json, requests
 import urllib.request
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
 from django.contrib.auth import update_session_auth_hash
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
@@ -27,7 +23,64 @@ def awareness(request):
 
 
 
-def estimation(request):
+def Estimation_Earthquake(request):
+    context={}
+    Type=0
+    Asia=0
+    Africa=0
+    Americas=0
+    Europe=0
+    Oceania=0
+    if request.method=='POST':
+        print('This is post')
+        Earthquake_Type= request.POST['Earthquake_Type']
+        Continent= request.POST['Continent']
+        Magnitude= request.POST['Magnitude']
+        Latitude= request.POST['Latitude']
+        Longitude= request.POST['Longitude']
+        if Earthquake_Type=='Ground_Movement':
+            Type=1
+        if Continent=='Africa':
+            Africa=1
+        elif Continent=='Asia':
+            Asia=1
+        elif Continent=='Americas':
+            Americas=1
+        elif Continent=='Europe':
+            Europe=1
+        else:
+            Oceania=1
+        print(Continent)
+        Dead = Earthquake_Dead_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude)
+        Injured = Earthquake_Injured_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude)
+        Affected = Earthquake_Affected_Predictions(Magnitude, Latitude, Longitude)
+        context={'Dead':Dead,'Injured':Injured,'Affected':Affected,'Display':None}
+    return render(request, 'Estimation_Earthquake.html',context)
+import pickle
+def Earthquake_Dead_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude):
+    model = pickle.load(open('Earthquake_Dead_RF.sav', 'rb'))
+
+    prediction = model.predict([
+        [Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude]
+    ])
+    return prediction
+def Earthquake_Injured_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude):
+    model = pickle.load(open('Earthquake_Injured_RF.sav', 'rb'))
+
+    prediction = model.predict([
+        [Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude]
+    ])
+    return prediction
+def Earthquake_Affected_Predictions(Magnitude, Latitude, Longitude):
+    model = pickle.load(open('Earthquake_Affected_RF.sav', 'rb'))
+
+    prediction = model.predict([
+        [Magnitude, Latitude, Longitude]
+    ])
+    return prediction
+
+
+def Estimation_Flood(request):
     context={}
     if request.method=='POST':
         print('This is post')
@@ -36,16 +89,25 @@ def estimation(request):
         magnitude= request.POST['Magnitude']
         c_x= request.POST['Centroid X']
         c_y= request.POST['Centroid Y']
-        data = pd.read_excel('static/c.xls')
-        data.dropna(inplace=True)
-        X = data.drop(['Dead','Nothing','Displaced','Duration in Days'],axis=1)
-        y = data['Dead']
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
-        knn = KNeighborsClassifier(n_neighbors=25)
-        knn.fit(X_train,y_train)
-        pred = knn.predict([[severity,affected,magnitude,c_x,c_y]])
-        context={'pred':pred}
-    return render(request, 'estimation.html',context)
+        Dead = Flood_Dead_Predictions(severity,affected,magnitude,c_x,c_y)
+        Displaced = Flood_Displaced_Predictions(severity,affected,magnitude,c_x,c_y)
+        context={'Dead':Dead,'Displaced':Displaced,'Display':None}
+    return render(request, 'Estimation_Flood.html',context)
+def Flood_Dead_Predictions(severity,affected,magnitude,c_x,c_y):
+    model = pickle.load(open('Flood_Dead_RF.sav', 'rb'))
+
+    prediction = model.predict([
+        [severity,affected,magnitude,c_x,c_y]
+    ])
+    return prediction
+def Flood_Displaced_Predictions(severity,affected,magnitude,c_x,c_y):
+    model = pickle.load(open('Flood_Displaced_RF.sav', 'rb'))
+
+    prediction = model.predict([
+        [severity,affected,magnitude,c_x,c_y]
+    ])
+    return prediction
+
 
 
 import itertools

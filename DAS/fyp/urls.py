@@ -4,7 +4,8 @@ from fyp import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('estimation/', views.estimation, name='estimation'),
+    path('Estimation_Earthquake/', views.Estimation_Earthquake, name='Estimation_Earthquake'),
+    path('Estimation_Flood/', views.Estimation_Flood, name='Estimation_Flood'),
     path('news/', views.news, name='news'),
     path('events/<str:type>', views.events, name='events'),
     path('contact/', views.contact, name='contact'),
