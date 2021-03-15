@@ -5,11 +5,11 @@ Weather
 {% endblock title %}
 
 {% block body %}
-    
+
 
 
 <div class="container my-3">
-    <h1 class="text-center">weather</h1>
+  <h1 class="text-center">Weather</h1>
   <br />
   <div class="row justify-content-center">
     <form method="post" class="col-md-6 col-md-offset-3">
@@ -17,26 +17,27 @@ Weather
       <div class="input-group text-center">
         <input type="text" class="form-control" name="city" placeholder="Enter City Name">
         <div class="input-group-btn">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
         </div>
     </form>
-        </div>
-    </div>
-  <div class="row justify-content-center">
-    {% if country_code and coordinate and temp and pressure and humidity and Description %}
-    <div class="col-md-6 col-md-offset-3">
-      <h3>country code : {{country_code}}</h1>
-        <h5>coordinate : {{coordinate}}</h5>
-        <h5>temp : {{temp}}</h5>
-        <h5>pressure : {{pressure}} </h5>
-        <h5>humidity : {{humidity}}</h5>
-        <h5>Description : {{Description}}</h5>
-    </div>
-    {% endif %}
   </div>
+</div>
+<div class="row justify-content-center">
+  {% if location %}
+  <div>
+    <h4>Location: {{location}}</h4><br>
+    <h4>Time Observation: {{time}}</h4><br>
+    <h4>Temperature: {{temp}}</h4><br>
+    <h4>Icon: <img src="{{icon}}"></img></h4><br>
+    <h4>Weather Condition: {{condition}}</h4><br>
+    <h4>Humidity: {{humidity}}</h4><br>
+    <h4>Alert: {{alert}}</h4>
+  </div>
+  {% endif %}
+</div>
 </div>
 
 
-    
-    
+
+
 {% endblock body %}

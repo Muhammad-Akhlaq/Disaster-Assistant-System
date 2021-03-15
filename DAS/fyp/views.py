@@ -171,7 +171,7 @@ def events(request,type):
 def weather(request):
     if request.method == 'POST': 
         city = request.POST['city'] 
-
+        """
         source = urllib.request.urlopen( 
             'http://api.openweathermap.org/data/2.5/weather?q='+ city +'&appid=f0b7bbd617bd589d478db5cfb6a08685').read() 
    
@@ -185,7 +185,24 @@ def weather(request):
             "pressure": str(list_of_data['main']['pressure']), 
             "humidity": str(list_of_data['main']['humidity']),
             "Description": str(list_of_data['weather'][0]['description']),
-        } 
+        }
+        """ 
+        url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=6c562dc1286349aeb43143853211303&q="+ city +"&mca=no&fx=no&num_of_days=2&alerts=yes&format=json"
+        response = requests.request("GET", url)
+        weather = response.json()
+        try:
+            alert = weather['data']['alerts']['alert'][0]['headline']
+        except:
+            alert = "No Alert"
+        data = { 
+            "location": str(weather['data']['request'][0]['query']), 
+            "time": str(weather['data']['current_condition'][0]['observation_time']), 
+            "temp": str(weather['data']['current_condition'][0]['temp_C']) + '°C', 
+            "condition": str(weather['data']['current_condition'][0]['weatherDesc'][0]['value']), 
+            "humidity": str(weather['data']['current_condition'][0]['humidity']),
+            "icon": str(weather['data']['current_condition'][0]['weatherIconUrl'][0]['value']),
+            "alert": alert
+        }
         print(data) 
     else: 
         data ={}
