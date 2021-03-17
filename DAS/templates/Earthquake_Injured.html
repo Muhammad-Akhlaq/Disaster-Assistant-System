@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block estimationactive %}active{% endblock estimationactive %}
+{% block earthquake_estimationactive %}active{% endblock earthquake_estimationactive %}
 {% block title %}
 Estimation
 {% endblock title %}
@@ -13,10 +13,10 @@ Estimation
 {% block body %}
 
  {% if user.is_authenticated %}
- <h2 class="text-center my-3">Estimation</h2>
+ <h2 class="text-center my-3">Injured Estimation</h2>
 
 <div class="container my-3" id='form'>
-    <form action="/Estimation_Earthquake/" method="POST">
+    <form action="/Earthquake_Injured/" method="POST">
         {% csrf_token %}
 
         <div class="form-group">
@@ -64,11 +64,9 @@ Estimation
     {% endif %}
 
 
-{% if Dead %}
+{% if Injured %}
 <div>
-    <h3>Predicted Deaths : {{Dead}}</h3>
     <h3>Predicted Injured : {{Injured}}</h3>
-    <h3>Predicted Affected : {{Affected}}</h3>
 </div>
 {% endif %}
 

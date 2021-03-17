@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block earthquake_estimationactive %}active{% endblock earthquake_estimationactive %}
+{% block title %}
+Estimation
+{% endblock title %}
+{% block additional_styles %}
+<style>
+   #form {
+    display: {{Display}};
+   }
+</style>
+{% endblock additional_styles %}
+{% block body %}
+
+ {% if user.is_authenticated %}
+ <h2 class="text-center my-3">Affected Estimation</h2>
+
+<div class="container my-3" id='form'>
+    <form action="/Earthquake_Affected/" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="Earthquake_Type">Earthquake Type:</label>
+                <select name="Earthquake_Type" id="Earthquake_Type">
+                    <option value="Ground_Movement">Ground Movement</option>
+                    <option value="Tsunami">Tsunami</option>
+                </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="Continent">Choose a Continent:</label>
+                <select name="Continent" id="Continent">
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Americas">Americas</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Magnitude</label>
+            <textarea class="form-control" id="Magnitude" name="Magnitude" rows="1" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Latitude</label>
+            <textarea class="form-control" id="Latitude" name="Latitude" rows="1" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Longitude</label>
+            <textarea class="form-control" id="Longitude" name="Longitude" rows="1" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+</div>
+
+    {% else %}
+    <p>Please login to see this page.</p>
+    
+    {% endif %}
+
+
+{% if Affected %}
+<div>
+    <h3>Predicted Affected : {{Affected}}</h3>
+</div>
+{% endif %}
+
+
+
+{% endblock body %}

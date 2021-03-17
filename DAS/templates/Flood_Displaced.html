@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block flood_estimationactive %}active{% endblock flood_estimationactive %}
+{% block title %}
+Estimation
+{% endblock title %}
+{% block additional_styles %}
+<style>
+   #form {
+    display: {{Display}};
+   }
+</style>
+{% endblock additional_styles %}
+{% block body %}
+
+ {% if user.is_authenticated %}
+ <h2 class="text-center my-3">Displaced Estimation</h2>
+
+<div class="container my-3" id='form'>
+    <form action="/Flood_Displaced/" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Severity</label>
+            <textarea class="form-control" id="Severity" name="Severity" rows="1" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Affected Area</label>
+            <textarea class="form-control" id="Affected Area" name="Affected Area" rows="1" required></textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Magnitude</label>
+            <textarea class="form-control" id="Magnitude" name="Magnitude" rows="1" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Centroid X</label>
+            <textarea class="form-control" id="Centroid X" name="Centroid X" rows="1" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Centroid Y</label>
+            <textarea class="form-control" id="Centroid Y" name="Centroid Y" rows="1" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+</div>
+
+    {% else %}
+    <p>Please login to see this page.</p>
+    
+    {% endif %}
+
+
+{% if Displaced %}
+<div>
+    <h3>Predicted Displaced : {{Displaced}}</h3>
+</div>
+{% endif %}
+
+
+
+{% endblock body %}

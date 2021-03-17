@@ -22,8 +22,7 @@ def awareness(request):
     return render(request, 'awareness.html')
 
 
-
-def Estimation_Earthquake(request):
+def Earthquake_Deaths(request):
     context={}
     Type=0
     Asia=0
@@ -52,10 +51,75 @@ def Estimation_Earthquake(request):
             Oceania=1
         print(Continent)
         Dead = Earthquake_Dead_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude)
+        context={'Dead':Dead,'Display':None}
+    return render(request, 'Earthquake_Deaths.html',context)
+
+
+def Earthquake_Injured(request):
+    context={}
+    Type=0
+    Asia=0
+    Africa=0
+    Americas=0
+    Europe=0
+    Oceania=0
+    if request.method=='POST':
+        print('This is post')
+        Earthquake_Type= request.POST['Earthquake_Type']
+        Continent= request.POST['Continent']
+        Magnitude= request.POST['Magnitude']
+        Latitude= request.POST['Latitude']
+        Longitude= request.POST['Longitude']
+        if Earthquake_Type=='Ground_Movement':
+            Type=1
+        if Continent=='Africa':
+            Africa=1
+        elif Continent=='Asia':
+            Asia=1
+        elif Continent=='Americas':
+            Americas=1
+        elif Continent=='Europe':
+            Europe=1
+        else:
+            Oceania=1
+        print(Continent)
         Injured = Earthquake_Injured_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude)
+        context={'Injured':Injured,'Display':None}
+    return render(request, 'Earthquake_Injured.html',context)
+
+def Earthquake_Affected(request):
+    context={}
+    Type=0
+    Asia=0
+    Africa=0
+    Americas=0
+    Europe=0
+    Oceania=0
+    if request.method=='POST':
+        print('This is post')
+        Earthquake_Type= request.POST['Earthquake_Type']
+        Continent= request.POST['Continent']
+        Magnitude= request.POST['Magnitude']
+        Latitude= request.POST['Latitude']
+        Longitude= request.POST['Longitude']
+        if Earthquake_Type=='Ground_Movement':
+            Type=1
+        if Continent=='Africa':
+            Africa=1
+        elif Continent=='Asia':
+            Asia=1
+        elif Continent=='Americas':
+            Americas=1
+        elif Continent=='Europe':
+            Europe=1
+        else:
+            Oceania=1
+        print(Continent)
         Affected = Earthquake_Affected_Predictions(Magnitude, Latitude, Longitude)
-        context={'Dead':Dead,'Injured':Injured,'Affected':Affected,'Display':None}
-    return render(request, 'Estimation_Earthquake.html',context)
+        context={'Affected':Affected,'Display':None}
+    return render(request, 'Earthquake_Affected.html',context)
+
+
 import pickle
 def Earthquake_Dead_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude):
     model = pickle.load(open('Earthquake_Dead_RF.sav', 'rb'))
@@ -80,7 +144,7 @@ def Earthquake_Affected_Predictions(Magnitude, Latitude, Longitude):
     return prediction
 
 
-def Estimation_Flood(request):
+def Flood_Deaths(request):
     context={}
     if request.method=='POST':
         print('This is post')
@@ -90,9 +154,22 @@ def Estimation_Flood(request):
         c_x= request.POST['Centroid X']
         c_y= request.POST['Centroid Y']
         Dead = Flood_Dead_Predictions(severity,affected,magnitude,c_x,c_y)
+        context={'Dead':Dead,'Display':None}
+    return render(request, 'Flood_Deaths.html',context)
+
+def Flood_Displaced(request):
+    context={}
+    if request.method=='POST':
+        print('This is post')
+        severity= request.POST['Severity']
+        affected= request.POST['Affected Area']
+        magnitude= request.POST['Magnitude']
+        c_x= request.POST['Centroid X']
+        c_y= request.POST['Centroid Y']
         Displaced = Flood_Displaced_Predictions(severity,affected,magnitude,c_x,c_y)
-        context={'Dead':Dead,'Displaced':Displaced,'Display':None}
-    return render(request, 'Estimation_Flood.html',context)
+        context={'Displaced':Displaced,'Display':None}
+    return render(request, 'Flood_Displaced.html',context)
+
 def Flood_Dead_Predictions(severity,affected,magnitude,c_x,c_y):
     model = pickle.load(open('Flood_Dead_RF.sav', 'rb'))
 
@@ -160,11 +237,26 @@ def news(request):
 
 
 
-def events(request,type):
+def Flood_Events(request,type):
     context = {'display2':'none','display':'block'}
-    if type=='Earthquake':
+    if type=='visual':
         context = {'display2':'block','display':'none'}
-    return render(request, 'events.html',context)
+    return render(request, 'Flood_Events.html',context)
+
+def Earthquake_Events(request,type):
+    data = []
+    lebel = []
+    earthquake = pd.read_excel("static/Earthquake.xlsx")
+    count = earthquake['Year'].value_counts()
+    count = count.sort_index()
+    for i in count:
+        data.append(i)
+    for j in count.index:
+        lebel.append(j)
+    context = {'display2':'none','display':'block','data':data,'lebel':lebel}
+    if type=='visual':
+        context = {'display2':'block','display':'none','data':data,'lebel':lebel}
+    return render(request, 'Earthquake_Events.html',context)
 
 
 
