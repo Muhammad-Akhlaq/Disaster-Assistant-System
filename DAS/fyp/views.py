@@ -207,6 +207,7 @@ def news(request):
     data = itertools.zip_longest(body,titles, country, date)
     context = {'data':data}
     return render(request, 'news.html',context)'''
+    """
     response = requests.get(url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2020-01-01&endtime=2021-01-02&minmagnitude=4"
 )
     data = response.json()
@@ -231,7 +232,36 @@ def news(request):
 
 
     data = itertools.zip_longest(titles, place,time,mag,coordinates,url,alert,magType)
-    context = {'data':data}
+    """
+    page = (request.GET.get('page'))
+    prev = 0
+    if page is None:
+        page = 1
+    else:
+        page = int(page)
+    next = str((page-1)*5)
+    response = requests.get(url = "https://api.reliefweb.int/v1/disasters?appname=rwint-user-0&offset="+next+"&profile=full&preset=latest&slim=1")
+    news = response.json()
+    headline=[]
+    discription=[]
+    country=[]
+    date=[]
+    type=[]
+    status=[]
+    for i in range(0,5):
+        headline.append(str(news['data'][i]['fields']['name']))
+        discription.append(news['data'][i]['fields']['description-html'])
+        country.append(news['data'][i]['fields']['country'][0]['name'])
+        date.append(str(news['data'][i]['fields']['date']['created']))
+        type.append(str(news['data'][i]['fields']['type'][0]['name']))
+        status.append(str(news['data'][i]['fields']['status']))
+    data = itertools.zip_longest(headline,discription, country, date,type,status)
+    next = page+1
+    if page>=1:
+        prev = page-1
+    else:
+        page=None
+    context = {'data':data, 'prev': prev, 'next': next}
     return render(request, 'news.html',context)
 
 

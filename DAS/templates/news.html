@@ -7,26 +7,40 @@ News
 
 <div class='mt-3'>
 
-<h2 style='text-align:center;'><i> See Latest Earthquakes </i></h2>
-<p style='text-align:center;'><i> Here You can read about latest earthquakes occured aroung the world </i></p>
+<h2 style='text-align:center;'><i>Latest Disasters News </i></h2>
+<p style='text-align:center;'><i> Here You can read about latest disasters occured aroung the world </i></p>
 
 
-{% for titles, place,time,mag,coordinates,url,alert,magType in data %}
+{% for headline,discription, country, date,type,status in data %}
 
 <div class="m-4 p-3 border">
-    <p class="mb-0 "> Place: {{place}}</p>
-    <h4>{{titles}}</h4>
-    <p class="mb-0 "> Time: {{time}}</p>
-    <p class="mb-0 "> Magnitude: {{mag}}{{magType}}</p>
-    <p class="mb-0 "> coordinates: {{coordinates}}</p>
-    <p class="mb-0 "> Alert(if any): {{alert}}</p>
-    <a target="_blank" rel="noopener noreferrer" href="{{url}}">View Details</a>
+    <p> Country: {{country}}</p>
+    <p>Date: {{date}}</p>
+    <h3>{{headline}}</h3>
+    <h4>Discription: </h4>{{discription|safe|slice:300}}
+    <p> Disaster Type: {{type}}</p>
+    <p>status: {{status}}</p>
 </div>
-</div>
+
 
 
 {% endfor %}
+<div class="my-3">
+    {% if prev %}
+    <button class="btn btn-primary"><a class="text-light" href="/news?page={{prev}}">&laquo;Previous</a></button>
+    {% else %}
+    <button class="btn btn-primary"><a class="text-light" href="#">&laquo;Previous</a></button>
+    {% endif %}
 
+
+    {% if next %}
+    <button class="btn btn-primary float-right"><a class="text-light" href="/news?page={{next}}">Next
+        &raquo;</a></button>
+    {% else %}
+    <button class="btn btn-primary float-right"><a class="text-light" href="#">Next &raquo;</a></button>
+    {% endif %}
+  </div>
+</div>
 
 
 {% endblock body %}
