@@ -274,19 +274,66 @@ def Flood_Events(request,type):
     return render(request, 'Flood_Events.html',context)
 
 def Earthquake_Events(request,type):
-    data = []
-    lebel = []
+    earthquake_no = []
+    year_lebel = []
     earthquake = pd.read_excel("static/Earthquake.xlsx")
     count = earthquake['Year'].value_counts()
     count = count.sort_index()
     for i in count:
-        data.append(i)
+        earthquake_no.append(i)
     for j in count.index:
-        lebel.append(j)
-    context = {'display2':'none','display':'block','data':data,'lebel':lebel}
+        year_lebel.append(j)
+    deaths,deaths_years,dead_count,dead_label = deathgraph(earthquake['Total Deaths'],earthquake['Year'],earthquake['Dead'])
+    print(dead_count)
+    print(dead_label)
+    Injured,Injured_years = Injuredgraph(earthquake['No Injured'],earthquake['Year'])
+    Affected,Affected_years = Affectedgraph(earthquake['Total Affected'],earthquake['Year'])
+    context = {'display2':'none','display':'block'}
     if type=='visual':
-        context = {'display2':'block','display':'none','data':data,'lebel':lebel}
+        context = {'display2':'block','display':'none','data':earthquake_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
+        'Injured':Injured,'Injured_years':Injured_years,'Affected':Affected,'Affected_years':Affected_years}
     return render(request, 'Earthquake_Events.html',context)
+def deathgraph(dead,year,dead_label):
+    deaths = []
+    years = []
+    label = []
+    label_count = []
+    dead_label = dead_label.value_counts()
+    for i in dead_label:
+        label_count.append(i)
+    for i in dead_label.index:
+        label.append(i)
+    index = dead[dead>100000].index
+    year = year.drop(index,axis=0)
+    dead = dead[dead<100000]
+    for j in dead:
+        deaths.append(j)
+    for j in year:
+        years.append(j)
+    return deaths,years,label_count,label
+def Injuredgraph(injureds,year):
+    injured = []
+    years = []
+    index = injureds[injureds>100000].index
+    year = year.drop(index,axis=0)
+    injureds = injureds[injureds<100000]
+    for j in injureds:
+        injured.append(j)
+    for j in year:
+        years.append(j)
+    return injured,years
+def Affectedgraph(Affecteds,year):
+    Affected = []
+    years = []
+    index = Affecteds[Affecteds>100000].index
+    year = year.drop(index,axis=0)
+    Affecteds = Affecteds[Affecteds<100000]
+    for j in Affecteds:
+        Affected.append(j)
+    for j in year:
+        years.append(j)
+    return Affected,years
+
 
 
 
