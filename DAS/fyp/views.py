@@ -16,6 +16,12 @@ def home(request):
     return render(request, 'home.html')
 
 
+def CovidLive(request):
+
+    return render(request, 'CovidLive.html')
+
+
+
 
 def awareness(request):
 
@@ -286,12 +292,13 @@ def Earthquake_Events(request,type):
     deaths,deaths_years,dead_count,dead_label = deathgraph(earthquake['Total Deaths'],earthquake['Year'],earthquake['Dead'])
     print(dead_count)
     print(dead_label)
-    Injured,Injured_years = Injuredgraph(earthquake['No Injured'],earthquake['Year'])
-    Affected,Affected_years = Affectedgraph(earthquake['Total Affected'],earthquake['Year'])
+    Injured,Injured_years,Injured_count,Injured_label = Injuredgraph(earthquake['No Injured'],earthquake['Year'],earthquake['Injured'])
+    Affected,Affected_years,Affected_count,Affected_label = Affectedgraph(earthquake['Total Affected'],earthquake['Year'],earthquake['Affected'])
     context = {'display2':'none','display':'block'}
     if type=='visual':
         context = {'display2':'block','display':'none','data':earthquake_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
-        'Injured':Injured,'Injured_years':Injured_years,'Affected':Affected,'Affected_years':Affected_years}
+        'Injured':Injured,'Injured_years':Injured_years,'Injured_label':Injured_label,'Injured_count':Injured_count,'Affected':Affected,'Affected_years':Affected_years,
+        'Affected_count':Affected_count,'Affected_label':Affected_label}
     return render(request, 'Earthquake_Events.html',context)
 def deathgraph(dead,year,dead_label):
     deaths = []
@@ -311,9 +318,16 @@ def deathgraph(dead,year,dead_label):
     for j in year:
         years.append(j)
     return deaths,years,label_count,label
-def Injuredgraph(injureds,year):
+def Injuredgraph(injureds,year,Injured_label):
     injured = []
     years = []
+    label = []
+    label_count = []
+    Injured_label = Injured_label.value_counts()
+    for i in Injured_label:
+        label_count.append(i)
+    for i in Injured_label.index:
+        label.append(i)
     index = injureds[injureds>100000].index
     year = year.drop(index,axis=0)
     injureds = injureds[injureds<100000]
@@ -321,10 +335,17 @@ def Injuredgraph(injureds,year):
         injured.append(j)
     for j in year:
         years.append(j)
-    return injured,years
-def Affectedgraph(Affecteds,year):
+    return injured,years,label_count,label
+def Affectedgraph(Affecteds,year,Affected_label):
     Affected = []
     years = []
+    label = []
+    label_count = []
+    Affected_label = Affected_label.value_counts()
+    for i in Affected_label:
+        label_count.append(i)
+    for i in Affected_label.index:
+        label.append(i)
     index = Affecteds[Affecteds>100000].index
     year = year.drop(index,axis=0)
     Affecteds = Affecteds[Affecteds<100000]
@@ -332,7 +353,7 @@ def Affectedgraph(Affecteds,year):
         Affected.append(j)
     for j in year:
         years.append(j)
-    return Affected,years
+    return Affected,years,label_count,label
 
 
 

@@ -28,5 +28,6 @@ urlpatterns = [
     path('myprofile/<str:username>', views.myprofile, name='myprofile'),
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout'),
+    path('CovidLive/', views.CovidLive, name='CovidLive'),
     path('aboutus/', views.aboutus, name='aboutus')
 ]
