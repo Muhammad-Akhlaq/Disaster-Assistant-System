@@ -29,5 +29,6 @@ urlpatterns = [
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout'),
     path('CovidLive/', views.CovidLive, name='CovidLive'),
+    path('newmap/', views.newmap, name='newmap'),
     path('aboutus/', views.aboutus, name='aboutus')
 ]

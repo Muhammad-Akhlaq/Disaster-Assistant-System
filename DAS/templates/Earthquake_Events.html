@@ -12,18 +12,27 @@ Events
    #div2 {
     display: {{display2}};
    }
+   #map{
+       height: 400px;
+       width: 100%;
+   }
 </style>
 {% endblock additional_styles %}
 {% block body %}
 
 <div class="abc" id='div2'>
     <h3 style="text-align: center;margin: 3px;">Earthquake Events Visualization</h3>
-    <canvas id="map" width="400" height="150"></canvas>
 
     <div>
     <h5 style="margin: 3px;">No. of Earthquake happens per year</h5>
-   <canvas id="No_of_Earthquakes" width="400" height="150"></canvas>
-   </div>
+    <canvas id="No_of_Earthquakes" width="400" height="150"></canvas>
+    </div>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+   
    <div>
        <h5 style="margin: 3px;">No. of Deaths happens per Earthquake</h5>
    <canvas id="No_of_Deaths" width="400" height="150"></canvas>
@@ -44,48 +53,52 @@ Events
 <div class="abc" id='div1'>
    <h3 style="text-align: center;margin: 3px;">Earthquake Events</h3> 
 <div style="margin-left: 90px;margin-right: 90px;">
-   <iframe width="100%" height="800" frameborder="0" scrolling="no" src="https://onedrive.live.com/embed?resid=EDCAC11E20956767%21435&authkey=%21ABWII62LoVw83Vo&em=2&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True"></iframe></div>
+   <iframe width="100%" height="800" frameborder="0" scrolling="no" src="https://onedrive.live.com/embed?resid=EDCAC11E20956767%21435&authkey=%21ABWII62LoVw83Vo&em=2&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True"></iframe>
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
 
-      let map;
+let map;
 
-      function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 2,
-          center: { lat: -33.865427, lng: 151.196123 },
-          mapTypeId: "terrain",
-        });
-        // Create a <script> tag and set the USGS URL as the source.
-        const script = document.createElement("script");
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src =
-          "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
-        document.getElementsByTagName("head")[0].appendChild(script);
-        map.data.setStyle((feature) => {
-          const magnitude = feature.getProperty("mag");
-          return {
-            icon: getCircle(magnitude),
-          };
-        });
-      }
+function initMap() {
+map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 2,
+    center: { lat: -33.865427, lng: 151.196123 },
+    mapTypeId: "terrain",
+});
+// Create a <script> tag and set the USGS URL as the source.
+const script = document.createElement("script");
+// This example uses a local copy of the GeoJSON stored at
+// http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+script.src =
+    "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
+document.getElementsByTagName("head")[0].appendChild(script);
+map.data.setStyle((feature) => {
+    const magnitude = feature.getProperty("mag");
+    return {
+    icon: getCircle(magnitude),
+    };
+});
+}
 
-      function getCircle(magnitude) {
-        return {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: "red",
-          fillOpacity: 0.2,
-          scale: Math.pow(2, magnitude) / 2,
-          strokeColor: "white",
-          strokeWeight: 0.5,
-        };
-      }
+function getCircle(magnitude) {
+return {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: "red",
+    fillOpacity: 0.2,
+    scale: Math.pow(2, magnitude) / 2,
+    strokeColor: "white",
+    strokeWeight: 0.5,
+};
+}
 
-      function eqfeed_callback(results) {
-        map.data.addGeoJson(results);
-      }
-     
+function eqfeed_callback(results) {
+map.data.addGeoJson(results);
+}
+
+
+
 
 
 
@@ -269,6 +282,5 @@ var No_of_Affecteds_pie = new Chart(ctx, {
     },
 });
 </script>
-
 
 {% endblock body %}

@@ -20,7 +20,17 @@ def CovidLive(request):
 
     return render(request, 'CovidLive.html')
 
-
+def newmap(request):
+    earthquake = pd.read_excel("static/Earthquake.xlsx")
+    map = []
+    country = earthquake['Country']
+    lat = earthquake['Latitude']
+    long = earthquake['Longitude']
+    for i in range(0,len(country)):
+        a=[country[i],lat[i],long[i]]
+        map.append(a)
+    context={'map':map}
+    return render(request,'newmap.html',context)
 
 
 def awareness(request):
