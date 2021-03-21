@@ -284,10 +284,32 @@ def news(request):
 
 
 def Flood_Events(request,type):
+    Flood_no = []
+    year_lebel = []
+    Flood = pd.read_csv("static/Flood.csv")
+    count = Flood['Year'].value_counts()
+    count = count.sort_index()
+    for i in count:
+        Flood_no.append(i)
+    for j in count.index:
+        year_lebel.append(j)
+    deaths,deaths_years,dead_count,dead_label = deathgraph(Flood['Dead'],Flood['Year'],Flood['Death'])
+    print(dead_count)
+    print(dead_label)
+    Displaced,Displaced_years,Displaced_count,Displaced_label = Injuredgraph(Flood['Displaced'],Flood['Year'],Flood['Displace'])
     context = {'display2':'none','display':'block'}
     if type=='visual':
-        context = {'display2':'block','display':'none'}
+        context = {'display2':'block','display':'none','data':Flood_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
+        'Displaced':Displaced,'Displaced_years':Displaced_years,'Displaced_label':Displaced_label,'Displaced_count':Displaced_count}
     return render(request, 'Flood_Events.html',context)
+
+
+
+
+
+
+
+
 
 def Earthquake_Events(request,type):
     earthquake_no = []
