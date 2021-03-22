@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block liveactive %}active{% endblock liveactive %}
+{% block title %}
+Live
+{% endblock title %}
+
+{% block body %}
+<h3 style="text-align: center;margin:10px">Live</h3>
+
+  <!-- cards -->
+
+  <div class="row justify-content-center" style="margin-left:10%;margin-bottom:2%">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img src="/static/images/Flood Small.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Flood</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="/flood" class="btn btn-primary">View Information</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img src="/static/images/Earthquake Small.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Earthquake</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="/earthquake" class="btn btn-primary">View Information</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img src="/static/images/Corona Small.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Covid-19</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="/CovidLive" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+{% endblock body %}

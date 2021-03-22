@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block weatheractive %}active{% endblock weatheractive %}
+{% block title %}
+Help
+{% endblock title %}
+
+{% block body %}
+
+
+
+<div class="container my-3">
+  <h1 class="text-center">Help</h1>
+  <div class="container my-3" id='form'>
+    <form action="/Earthquake_Deaths/" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="Continent">Country:</label>
+                <select name="Continent" id="Continent">
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Germany">Germany</option>
+                    <option value="China">China</option>
+                    <option value="Africa">Africa</option>
+                </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+</div>
+
+
+
+
+{% endblock body %}

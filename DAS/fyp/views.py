@@ -16,20 +16,30 @@ def home(request):
     return render(request, 'home.html')
 
 
+def help(request):
+
+    return render(request, 'help.html')
+
+
+def live(request):
+
+    return render(request, 'live.html')
+
+
 def CovidLive(request):
 
     return render(request, 'CovidLive.html')
 
 def newmap(request):
     earthquake = pd.read_excel("static/Earthquake.xlsx")
-    map = []
+    positions = []
     country = earthquake['Country']
     lat = earthquake['Latitude']
-    long = earthquake['Longitude']
+    longi = earthquake['Longitude']
     for i in range(0,len(country)):
-        a=[country[i],lat[i],long[i]]
-        map.append(a)
-    context={'map':map}
+        a=[country[i],float(lat[i]),float(longi[i])]
+        positions.append(a)
+    context={'positions':positions}
     return render(request,'newmap.html',context)
 
 
@@ -316,6 +326,8 @@ def Earthquake_Events(request,type):
     year_lebel = []
     earthquake = pd.read_excel("static/Earthquake.xlsx")
     count = earthquake['Year'].value_counts()
+    country = earthquake['Country'].unique()
+    country.sort()
     count = count.sort_index()
     for i in count:
         earthquake_no.append(i)
@@ -328,7 +340,7 @@ def Earthquake_Events(request,type):
     Affected,Affected_years,Affected_count,Affected_label = Affectedgraph(earthquake['Total Affected'],earthquake['Year'],earthquake['Affected'])
     context = {'display2':'none','display':'block'}
     if type=='visual':
-        context = {'display2':'block','display':'none','data':earthquake_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
+        context = {'display2':'block','display':'none','Country':country,'data':earthquake_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
         'Injured':Injured,'Injured_years':Injured_years,'Injured_label':Injured_label,'Injured_count':Injured_count,'Affected':Affected,'Affected_years':Affected_years,
         'Affected_count':Affected_count,'Affected_label':Affected_label}
     return render(request, 'Earthquake_Events.html',context)

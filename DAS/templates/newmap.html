@@ -17,7 +17,6 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        background-color: indigo;
       }
     </style>
     <script>
@@ -26,14 +25,14 @@
       // to the base of the flagpole.
       function initMap() {
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 10,
-          center: { lat: -33.9, lng: 151.2 },
+          zoom: 8,
+          center: { lat: 32.4392, lng: 74.4892 },
         });
         setMarkers(map);
       }
       // Data for the markers consisting of a name, a LatLng and a zIndex for the
       // order in which these markers should display on top of each other.
-      const beaches = {{map|safe}};
+      const beaches = {{positions|safe}};
 
       function setMarkers(map) {
         // Adds markers to the map.
@@ -74,7 +73,6 @@
   </head>
   <body>
     <div id="map"></div>
-
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"

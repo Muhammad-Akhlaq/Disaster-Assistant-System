@@ -25,7 +25,20 @@ Events
 
 <div class="abc" id='div2'>
     <h3 style="text-align: center;margin: 3px;">Earthquake Events Visualization</h3>
-
+<div class="container my-3" id='form'>
+    <form action="/Earthquake_Events/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="Continent">Country:</label>
+                <select name="Continent" id="Continent">
+                    {% for c in Country %}
+                    <option value="{{c}}">{{c}}</option>
+                    {% endfor %}
+                </select>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </div>
+    </form>
+</div>
     <h5 style="margin: 3px;">No. of Earthquake happens per year</h5>
     <div class="Earthquake">
         <div>
