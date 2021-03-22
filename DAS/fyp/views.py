@@ -296,9 +296,24 @@ def news(request):
 def Flood_Events(request,type):
     Flood_no = []
     year_lebel = []
-    Flood = pd.read_csv("static/Flood.csv")
+    positions = []
+    Flood = pd.read_csv("static/Flood.csv",encoding="latin-1")
+    if request.method=='POST':
+        country_filter = request.POST['country']
+        print(country_filter)
+        if country_filter!='all':
+            Flood = Flood[Flood['Country']==str(country_filter)]
+    index = Flood.index
+    country = Flood['Country']
+    lat = Flood['Centroid X']
+    longi = Flood['Centroid Y']
+    for i in index:
+        a=[country[i],float(lat[i]),float(longi[i])]
+        positions.append(a)
     count = Flood['Year'].value_counts()
     count = count.sort_index()
+    country = Flood['Country'].unique()
+    country.sort()
     for i in count:
         Flood_no.append(i)
     for j in count.index:
@@ -309,7 +324,7 @@ def Flood_Events(request,type):
     Displaced,Displaced_years,Displaced_count,Displaced_label = Injuredgraph(Flood['Displaced'],Flood['Year'],Flood['Displace'])
     context = {'display2':'none','display':'block'}
     if type=='visual':
-        context = {'display2':'block','display':'none','data':Flood_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
+        context = {'display2':'block','display':'none','positions':positions,'Country':country,'data':Flood_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
         'Displaced':Displaced,'Displaced_years':Displaced_years,'Displaced_label':Displaced_label,'Displaced_count':Displaced_count}
     return render(request, 'Flood_Events.html',context)
 
@@ -325,6 +340,20 @@ def Earthquake_Events(request,type):
     earthquake_no = []
     year_lebel = []
     earthquake = pd.read_excel("static/Earthquake.xlsx")
+    positions = []
+    if request.method=='POST':
+        country_filter = request.POST['country']
+        print(country_filter)
+        if country_filter!='all':
+            earthquake = earthquake[earthquake['Country']==str(country_filter)]
+    index = earthquake.index
+    print(len(earthquake))
+    country = earthquake['Country']
+    lat = earthquake['Latitude']
+    longi = earthquake['Longitude']
+    for i in index:
+        a=[country[i],float(lat[i]),float(longi[i])]
+        positions.append(a)
     count = earthquake['Year'].value_counts()
     country = earthquake['Country'].unique()
     country.sort()
@@ -334,13 +363,11 @@ def Earthquake_Events(request,type):
     for j in count.index:
         year_lebel.append(j)
     deaths,deaths_years,dead_count,dead_label = deathgraph(earthquake['Total Deaths'],earthquake['Year'],earthquake['Dead'])
-    print(dead_count)
-    print(dead_label)
     Injured,Injured_years,Injured_count,Injured_label = Injuredgraph(earthquake['No Injured'],earthquake['Year'],earthquake['Injured'])
     Affected,Affected_years,Affected_count,Affected_label = Affectedgraph(earthquake['Total Affected'],earthquake['Year'],earthquake['Affected'])
     context = {'display2':'none','display':'block'}
     if type=='visual':
-        context = {'display2':'block','display':'none','Country':country,'data':earthquake_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
+        context = {'display2':'block','display':'none','positions':positions,'Country':country,'data':earthquake_no,'lebel':year_lebel,'deaths':deaths,'deaths_years':deaths_years,'dead_count':dead_count,'dead_label':dead_label,
         'Injured':Injured,'Injured_years':Injured_years,'Injured_label':Injured_label,'Injured_count':Injured_count,'Affected':Affected,'Affected_years':Affected_years,
         'Affected_count':Affected_count,'Affected_label':Affected_label}
     return render(request, 'Earthquake_Events.html',context)
