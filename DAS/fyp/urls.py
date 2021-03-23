@@ -31,6 +31,7 @@ urlpatterns = [
     path('CovidLive/', views.CovidLive, name='CovidLive'),
     path('help/', views.help, name='help'),
     path('live/', views.live, name='live'),
+    path('earthquakeLive/', views.earthquakeLive, name='earthquakeLive'),
     path('newmap/', views.newmap, name='newmap'),
     path('aboutus/', views.aboutus, name='aboutus')
 ]

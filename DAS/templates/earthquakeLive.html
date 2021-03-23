@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block eventsactive %}active{% endblock eventsactive %}
+{% block title %}
+Earthquake Live
+{% endblock title %}
+
+{% block additional_styles %}
+<style>
+   #map{
+       height: 100vh;
+       width: 100%;
+   }
+</style>
+{% endblock additional_styles %}
+{% block body %}
+<h3 style="text-align: center;">Earthquake Live Mapping and Prediction</h3>
+<div id="map"></div>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+<h4>Details of Earthquakes</h4>
+{% for titles, place,time, mag,coordinates,url,alert,magType,deaths in data %}
+
+<div class="m-1 border">
+    <p> Country: {{place}}</p>
+    <p>time: {{time}}</p>
+    <h3>{{titles}}</h3>
+    <p>{{mag}}</p>
+    <p>Predicted Deaths: {{deaths}}</p>
+</div>
+
+{% endfor %}
+
+
+
+
+    <script>
+
+        function initMap() {
+                const map = new google.maps.Map(document.getElementById("map"), {
+                  zoom: 3,
+                  center: { lat: 32.4392, lng: 74.4892 },
+                });
+                setMarkers(map);
+              }
+              // Data for the markers consisting of a name, a LatLng and a zIndex for the
+              // order in which these markers should display on top of each other.
+              const beaches = {{positions|safe}};
+        
+              function setMarkers(map) {
+                // Adds markers to the map.
+                // Marker sizes are expressed as a Size of X,Y where the origin of the image
+                // (0,0) is located in the top left of the image.
+                // Origins, anchor positions and coordinates of the marker increase in the X
+                // direction to the right and in the Y direction down.
+                const image = {
+                  url:
+                    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+                  // This marker is 20 pixels wide by 32 pixels high.
+                  size: new google.maps.Size(20, 32),
+                  // The origin for this image is (0, 0).
+                  origin: new google.maps.Point(0, 0),
+                  // The anchor for this image is the base of the flagpole at (0, 32).
+                  anchor: new google.maps.Point(0, 32),
+                };
+                // Shapes define the clickable region of the icon. The type defines an HTML
+                // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                // The final coordinate closes the poly by connecting to the first coordinate.
+                const shape = {
+                  coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                  type: "poly",
+                };
+        
+                for (let i = 0; i < beaches.length; i++) {
+                  const beach = beaches[i];
+                  new google.maps.Marker({
+                    position: { lat: beach[1], lng: beach[2] },
+                    map,
+                    icon: image,
+                    shape: shape,
+                    title: beach[0],
+                  });
+                }
+              }
+     </script>   
+{% endblock body%}

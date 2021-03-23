@@ -25,7 +25,39 @@ def live(request):
 
     return render(request, 'live.html')
 
-
+def earthquakeLive(request):
+    response = requests.get(url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=4")
+    data = response.json()
+    titles=[]
+    place=[]
+    time=[]
+    mag=[]
+    coordinates=[]
+    url=[]
+    alert=[]
+    magType=[]
+    positions = []
+    deaths = []
+    #len(data['features']) for complete retreive data
+    for i in range(10):
+        titles.append(data['features'][i]['properties']['title'])
+        place.append(data['features'][i]['properties']['place'])
+        time.append(data['features'][i]['properties']['time'])
+        mag.append(data['features'][i]['properties']['mag'])
+        url.append(data['features'][i]['properties']['url'])
+        alert.append(data['features'][i]['properties']['alert'])
+        magType.append(data['features'][i]['properties']['magType'])
+        coordinates.append(data['features'][i]['geometry']['coordinates'])
+        a=[place[i],coordinates[i][1],coordinates[i][0]]
+        positions.append(a)
+        if data['features'][0]['properties']['tsunami']==0:
+            type = 1
+        else:
+            type = 0
+        deaths.append(Earthquake_Dead_Predictions(type, 0, 0, 1, 0, 0, mag[0],coordinates[i][1], coordinates[i][0]))
+    data = itertools.zip_longest(titles, place,time,mag,coordinates,url,alert,magType,deaths)
+    context = {'positions':positions,'data':data}
+    return render(request,'earthquakeLive.html',context)
 def CovidLive(request):
 
     return render(request, 'CovidLive.html')
