@@ -7,7 +7,7 @@ Earthquake Live
 {% block additional_styles %}
 <style>
    #map{
-       height: 100vh;
+       height: 60vh;
        width: 100%;
    }
 </style>
@@ -19,18 +19,32 @@ Earthquake Live
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"
       async
     ></script>
-<h4>Details of Earthquakes</h4>
-{% for titles, place,time, mag,coordinates,url,alert,magType,deaths in data %}
+<h4>Predictions of Earthquakes</h4>
 
-<div class="m-1 border">
-    <p> Country: {{place}}</p>
-    <p>time: {{time}}</p>
-    <h3>{{titles}}</h3>
-    <p>{{mag}}</p>
-    <p>Predicted Deaths: {{deaths}}</p>
-</div>
+<table style="width:100%">
+  <tr>
+    <th>Country</th>
+    <th>Time</th> 
+    <th>Title</th>
+    <th>Magnitude</th>
+    <th>Deaths</th>
+    <th>Injured</th>
+    <th>Affected</th>
+  </tr>
+  {% for titles, place,time, mag,coordinates,url,alert,magType,deaths,injured,affected in data %}
+  <tr>
+    <td>{{place}}</td>
+    <td>{{time}}</td> 
+    <td>{{titles}}</td>
+    <td>{{mag}}</td>
+    <td>{{deaths}}</td>
+    <td>{{injured}}</td>
+    <td>{{affected}}</td>
+  </tr>
+  {% endfor %}
+</table>
 
-{% endfor %}
+
 
 
 

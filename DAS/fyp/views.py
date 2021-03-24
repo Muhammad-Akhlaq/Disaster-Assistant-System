@@ -38,10 +38,13 @@ def earthquakeLive(request):
     magType=[]
     positions = []
     deaths = []
+    injured = []
+    affected = []
     #len(data['features']) for complete retreive data
-    for i in range(10):
+    for i in range(25):
         titles.append(data['features'][i]['properties']['title'])
-        place.append(data['features'][i]['properties']['place'])
+        p = data['features'][i]['properties']['place'].split(' ')
+        place.append(p[-1])
         time.append(data['features'][i]['properties']['time'])
         mag.append(data['features'][i]['properties']['mag'])
         url.append(data['features'][i]['properties']['url'])
@@ -55,7 +58,9 @@ def earthquakeLive(request):
         else:
             type = 0
         deaths.append(Earthquake_Dead_Predictions(type, 0, 0, 1, 0, 0, mag[0],coordinates[i][1], coordinates[i][0]))
-    data = itertools.zip_longest(titles, place,time,mag,coordinates,url,alert,magType,deaths)
+        injured.append(Earthquake_Injured_Predictions(type, 0, 0, 1, 0, 0, mag[0],coordinates[i][1], coordinates[i][0]))
+        affected.append(Earthquake_Affected_Predictions(mag[0],coordinates[i][1], coordinates[i][0]))
+    data = itertools.zip_longest(titles, place,time,mag,coordinates,url,alert,magType,deaths,injured,affected)
     context = {'positions':positions,'data':data}
     return render(request,'earthquakeLive.html',context)
 def CovidLive(request):
@@ -337,8 +342,8 @@ def Flood_Events(request,type):
             Flood = Flood[Flood['Country']==str(country_filter)]
     index = Flood.index
     country = Flood['Country']
-    lat = Flood['Centroid X']
-    longi = Flood['Centroid Y']
+    longi = Flood['Centroid X']
+    lat = Flood['Centroid Y']
     for i in index:
         a=[country[i],float(lat[i]),float(longi[i])]
         positions.append(a)
