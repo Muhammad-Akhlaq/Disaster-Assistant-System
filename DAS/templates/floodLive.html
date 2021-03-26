@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-Earthquake Live
+Flood Live
 {% endblock title %}
 
 {% block additional_styles %}
@@ -12,33 +12,24 @@ Earthquake Live
 </style>
 {% endblock additional_styles %}
 {% block body %}
-<h3 style="text-align: center;">Earthquake Live Mapping and Prediction</h3>
+<h3 style="text-align: center;">Flood Live Mapping and Prediction</h3>
 <div id="map"></div>
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"
       async
     ></script>
-<h4>Predictions of Earthquakes</h4>
-
+<h4>Predictions of Floods</h4>
 <table style="width:100%">
   <tr>
     <th>Country</th>
     <th>Time</th> 
     <th>Title</th>
-    <th>Magnitude</th>
-    <th>Deaths</th>
-    <th>Injured</th>
-    <th>Affected</th>
   </tr>
-  {% for titles, place,time, mag,coordinates,url,alert,magType,deaths,injured,affected in data %}
+  {% for headline, country,date in data %}
   <tr>
-    <td>{{place}}</td>
-    <td>{{time}}</td> 
-    <td>{{titles}}</td>
-    <td>{{mag}}</td>
-    <td>{{deaths}}</td>
-    <td>{{injured}}</td>
-    <td>{{affected}}</td>
+    <td>{{country}}</td>
+    <td>{{date}}</td> 
+    <td>{{headline}}</td>
   </tr>
   {% endfor %}
 </table>

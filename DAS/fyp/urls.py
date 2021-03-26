@@ -32,6 +32,7 @@ urlpatterns = [
     path('help/', views.help, name='help'),
     path('live/', views.live, name='live'),
     path('earthquakeLive/', views.earthquakeLive, name='earthquakeLive'),
+    path('floodLive/', views.floodLive, name='floodLive'),
     path('newmap/', views.newmap, name='newmap'),
     path('aboutus/', views.aboutus, name='aboutus')
 ]

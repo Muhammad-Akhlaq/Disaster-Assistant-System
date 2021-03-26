@@ -25,6 +25,29 @@ def live(request):
 
     return render(request, 'live.html')
 
+
+def floodLive(request):
+    response = requests.get(url = "https://api.reliefweb.int/v1/disasters?appname=rwint-user-0&profile=full&preset=latest&slim=1&limit=100")
+    news = response.json()
+    headline=[]
+    country=[]
+    date=[]
+    positions = []
+    for i in range(100):
+        type = str(news['data'][i]['fields']['type'][0]['name'])
+        if type == 'Flood':
+            headline.append(str(news['data'][i]['fields']['name']))
+            country.append(news['data'][i]['fields']['country'][0]['name'])
+            date.append(str(news['data'][i]['fields']['date']['created']))
+            lat = float(news['data'][i]['fields']['country'][0]['location']['lat'])
+            long = float(news['data'][i]['fields']['country'][0]['location']['lon'])
+            positions.append([country[0],lat,long])
+    data = itertools.zip_longest(headline, country, date)
+    context = {'data':data, 'positions': positions}
+    return render(request,'floodLive.html',context)
+
+
+
 def earthquakeLive(request):
     response = requests.get(url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=4")
     data = response.json()
