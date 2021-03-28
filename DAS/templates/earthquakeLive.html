@@ -22,7 +22,7 @@ Earthquake Live
 
 <table style="width:100%">
   <tr>
-    <th>Country</th>
+    <th>Place</th>
     <th>Time</th> 
     <th>Title</th>
     <th>Magnitude</th>
@@ -36,9 +36,15 @@ Earthquake Live
     <td>{{time}}</td> 
     <td>{{titles}}</td>
     <td>{{mag}}</td>
-    <td>{{deaths}}</td>
-    <td>{{injured}}</td>
-    <td>{{affected}}</td>
+    {% for death in deaths %}
+    <td>{{death}}</td>
+    {% endfor %}
+    {% for injureds in injured %}
+    <td>{{injureds}}</td>
+    {% endfor %}
+    {% for affecteds in affected %}
+    <td>{{affecteds}}</td>
+    {% endfor %}
   </tr>
   {% endfor %}
 </table>

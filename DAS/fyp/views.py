@@ -38,7 +38,8 @@ def floodLive(request):
         if type == 'Flood':
             headline.append(str(news['data'][i]['fields']['name']))
             country.append(news['data'][i]['fields']['country'][0]['name'])
-            date.append(str(news['data'][i]['fields']['date']['created']))
+            d = str(news['data'][i]['fields']['date']['created']).split('T')
+            date.append(d[0])
             lat = float(news['data'][i]['fields']['country'][0]['location']['lat'])
             long = float(news['data'][i]['fields']['country'][0]['location']['lon'])
             positions.append([country[0],lat,long])
@@ -66,7 +67,10 @@ def earthquakeLive(request):
     #len(data['features']) for complete retreive data
     for i in range(25):
         titles.append(data['features'][i]['properties']['title'])
-        p = data['features'][i]['properties']['place'].split(' ')
+        try:
+            p = data['features'][i]['properties']['place'].split('of')
+        except:
+            p = data['features'][i]['properties']['place'].split('-')
         place.append(p[-1])
         time.append(data['features'][i]['properties']['time'])
         mag.append(data['features'][i]['properties']['mag'])
