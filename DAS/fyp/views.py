@@ -48,7 +48,7 @@ def floodLive(request):
     return render(request,'floodLive.html',context)
 
 
-
+from datetime import datetime
 def earthquakeLive(request):
     response = requests.get(url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=4")
     data = response.json()
@@ -72,7 +72,14 @@ def earthquakeLive(request):
         except:
             p = data['features'][i]['properties']['place'].split('-')
         place.append(p[-1])
-        time.append(data['features'][i]['properties']['time'])
+        #time formatting
+        time_strap = str(data['features'][i]['properties']['time'])
+        time_strap = int(time_strap[:10])
+        time_strap = datetime.fromtimestamp(time_strap)
+        date_ = time_strap.strftime("%x")
+        time_ = time_strap.strftime("%X")
+        time_strap = date_+" "+time_
+        time.append(time_strap)
         mag.append(data['features'][i]['properties']['mag'])
         url.append(data['features'][i]['properties']['url'])
         alert.append(data['features'][i]['properties']['alert'])
@@ -113,7 +120,6 @@ def awareness(request):
 
 
 def Earthquake_Deaths(request):
-    context={}
     Type=0
     Asia=0
     Africa=0
@@ -141,12 +147,12 @@ def Earthquake_Deaths(request):
             Oceania=1
         print(Continent)
         Dead = Earthquake_Dead_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude)
-        context={'Dead':Dead,'Display':None}
-    return render(request, 'Earthquake_Deaths.html',context)
+        return redirect("EstimatedResult",Type="Dead",Lat=Latitude,Long=Longitude,Result=Dead[0])
+    return render(request, 'Earthquake_Deaths.html')
+
 
 
 def Earthquake_Injured(request):
-    context={}
     Type=0
     Asia=0
     Africa=0
@@ -174,11 +180,10 @@ def Earthquake_Injured(request):
             Oceania=1
         print(Continent)
         Injured = Earthquake_Injured_Predictions(Type, Africa, Americas, Asia, Europe, Oceania, Magnitude, Latitude, Longitude)
-        context={'Injured':Injured,'Display':None}
-    return render(request, 'Earthquake_Injured.html',context)
+        return redirect("EstimatedResult",Type="Injured",Lat=Latitude,Long=Longitude,Result=Injured[0])
+    return render(request, 'Earthquake_Injured.html')
 
 def Earthquake_Affected(request):
-    context={}
     Type=0
     Asia=0
     Africa=0
@@ -206,8 +211,8 @@ def Earthquake_Affected(request):
             Oceania=1
         print(Continent)
         Affected = Earthquake_Affected_Predictions(Magnitude, Latitude, Longitude)
-        context={'Affected':Affected,'Display':None}
-    return render(request, 'Earthquake_Affected.html',context)
+        return redirect("EstimatedResult",Type="Dead",Lat=Latitude,Long=Longitude,Result=Affected[0])
+    return render(request, 'Earthquake_Affected.html')
 
 
 import pickle
@@ -235,7 +240,6 @@ def Earthquake_Affected_Predictions(Magnitude, Latitude, Longitude):
 
 
 def Flood_Deaths(request):
-    context={}
     if request.method=='POST':
         print('This is post')
         severity= request.POST['Severity']
@@ -244,11 +248,10 @@ def Flood_Deaths(request):
         c_x= request.POST['Centroid X']
         c_y= request.POST['Centroid Y']
         Dead = Flood_Dead_Predictions(severity,affected,magnitude,c_x,c_y)
-        context={'Dead':Dead,'Display':None}
-    return render(request, 'Flood_Deaths.html',context)
+        return redirect("EstimatedResult",Type="Dead",Lat=c_x,Long=c_y,Result=Dead[0])
+    return render(request, 'Flood_Deaths.html')
 
 def Flood_Displaced(request):
-    context={}
     if request.method=='POST':
         print('This is post')
         severity= request.POST['Severity']
@@ -257,8 +260,8 @@ def Flood_Displaced(request):
         c_x= request.POST['Centroid X']
         c_y= request.POST['Centroid Y']
         Displaced = Flood_Displaced_Predictions(severity,affected,magnitude,c_x,c_y)
-        context={'Displaced':Displaced,'Display':None}
-    return render(request, 'Flood_Displaced.html',context)
+        return redirect("EstimatedResult",Type="Displaced",Lat=c_x,Long=c_y,Result=Displaced[0])
+    return render(request, 'Flood_Displaced.html')
 
 def Flood_Dead_Predictions(severity,affected,magnitude,c_x,c_y):
     model = pickle.load(open('Flood_Dead_RF.sav', 'rb'))
@@ -274,6 +277,78 @@ def Flood_Displaced_Predictions(severity,affected,magnitude,c_x,c_y):
         [severity,affected,magnitude,c_x,c_y]
     ])
     return prediction
+
+
+
+
+
+def EstimatedResult(request,Type,Lat,Long,Result):
+    if Type == "Dead":
+        range,value = death_range(Result)
+    elif Type == "Injured":
+        range,value = Injured_range(Result)
+    elif Type == "Affected":
+        range,value = Affected_range(Result)
+    else:
+        range,value = Affected_range(Result)
+    context = {"Result":Result,"Type":Type,"range":range,"value":value,"lattitude":Lat,"longitude":Long}
+    return render(request,"EstimatedResult.html",context)
+
+#get range by estmated result
+def death_range(result):
+    if result == "GREEN":
+        range = "0 to 10"
+        value = 10
+    elif result == "BLUE":
+        range = "0 to 30"
+        value = 30
+    elif result == "YELLOW":
+        range = "0 to 50"
+        value = 50
+    elif result=="ORANGE":
+        range = "0 to 100"
+        value = 100
+    else:
+        range = "more than 100"
+        value = 200
+    return range,value
+
+def Injured_range(result):
+    if result == "GREEN":
+        range = "0 to 20"
+        value = 20
+    elif result == "BLUE":
+        range = "0 to 50"
+        value = 50
+    elif result == "YELLOW":
+        range = "0 to 100"
+        value = 100
+    elif result=="ORANGE":
+        range = "0 to 200"
+        value = 200
+    else:
+        range = "more than 200"
+        value = 300
+    return range,value
+
+def Affected_range(result):
+    if result == "GREEN":
+        range = "0 to 50"
+        value = 50
+    elif result == "BLUE":
+        range = "0 to 100"
+        value = 100
+    elif result == "YELLOW":
+        range = "0 to 200"
+        value = 200
+    elif result=="ORANGE":
+        range = "0 to 300"
+        value = 300
+    else:
+        range = "more than 300"
+        value = 400
+    return range,value
+
 
 
 
@@ -342,7 +417,9 @@ def news(request):
         headline.append(str(news['data'][i]['fields']['name']))
         discription.append(news['data'][i]['fields']['description-html'])
         country.append(news['data'][i]['fields']['country'][0]['name'])
-        date.append(str(news['data'][i]['fields']['date']['created']))
+        date_ = str(news['data'][i]['fields']['date']['created'])
+        date_ = date_.split("T")
+        date.append(date_[0])
         type.append(str(news['data'][i]['fields']['type'][0]['name']))
         status.append(str(news['data'][i]['fields']['status']))
     data = itertools.zip_longest(headline,discription, country, date,type,status)
@@ -435,6 +512,9 @@ def Earthquake_Events(request,type):
         'Injured':Injured,'Injured_years':Injured_years,'Injured_label':Injured_label,'Injured_count':Injured_count,'Affected':Affected,'Affected_years':Affected_years,
         'Affected_count':Affected_count,'Affected_label':Affected_label}
     return render(request, 'Earthquake_Events.html',context)
+
+
+
 def deathgraph(dead,year,dead_label):
     deaths = []
     years = []

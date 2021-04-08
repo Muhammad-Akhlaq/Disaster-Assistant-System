@@ -13,7 +13,7 @@ Events
     display: {{display2}};
    }
    #map{
-    height: 160px;
+    height: 400px;
        width: 100%;
    }
    .Earthquake {
@@ -46,38 +46,33 @@ Events
         </div>
     </form>
 </div>
+<h5 style="margin: 3px;">All Previous Floods Mapping</h5>
+<div>
+    <div id="map"></div>
+ </div>
    <h5 style="margin: 3px;">No. of Floods happens per year</h5>
-   <div class="Earthquake">
-       <div>
-   <canvas id="No_of_Earthquakes" width="400" height="150"></canvas>
-   </div>
    <div>
-   <div id="map"></div>
-</div>
+   <canvas id="No_of_Earthquakes" width="400" height="150"></canvas>
 </div>
    <script
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"
      async
    ></script>
   
-  <div class="Earthquake">
+
       <h5 style="margin: 3px;">No. of Deaths happens per Flood</h5>
-      <div>
+
   <canvas id="No_of_Deaths" width="400" height="150"></canvas>
-</div>
-  <div>
+<br>
    <canvas id="No_of_Deaths_pie" width="400" height="150"></canvas>
-</div> 
-</div>
-<div class="Earthquake">
+
+
   <h5 style="margin: 3px;">No. of Displaced Peoples per Flood</h5>
-  <div>
+
   <canvas id="No_of_Injureds" width="400" height="150"></canvas>
-  </div>
-  <div>
+<br>
   <canvas id="No_of_Injureds_pie" width="400" height="150"></canvas>
-  </div>
-  </div>
+
 </div>
 
 

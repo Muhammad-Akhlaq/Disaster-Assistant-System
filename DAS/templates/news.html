@@ -3,6 +3,16 @@
 {% block title %}
 News
 {% endblock title %}
+{% block additional_styles %}
+<style>
+   button{
+       margin: 2%;
+   }
+   p{
+       margin: 0;
+   }
+</style>
+{% endblock additional_styles %}
 {% block body %}
 
 <div class='mt-3'>
@@ -14,12 +24,24 @@ News
 {% for headline,discription, country, date,type,status in data %}
 
 <div class="m-4 p-3 border">
-    <p> Country: {{country}}</p>
-    <p>Date: {{date}}</p>
-    <h3>{{headline}}</h3>
-    <h4>Discription: </h4>{{discription|safe|slice:300}}
-    <p> Disaster Type: {{type}}</p>
-    <p>status: {{status}}</p>
+    <table style="width:100%">
+        <tr>
+          <th>Country: </th>
+          <th>Date & Time: </th> 
+          <th>Disaster Type: </th>
+          <th>status: </th>
+        </tr>
+        <tr>
+            <td>{{country}}</td>
+            <td>{{date}}</td> 
+            <td>{{type}}</td>
+            <td>{{status}}</td>
+        </tr>
+      </table>
+    <h3>Headline:</h3>
+    <p>{{headline}}</p>
+    <h4>Discription:</h4>
+    <p>{{discription|safe|slice:300}}</p>
 </div>
 
 

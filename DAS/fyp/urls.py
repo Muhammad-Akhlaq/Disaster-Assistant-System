@@ -9,6 +9,7 @@ urlpatterns = [
     path('Earthquake_Affected/', views.Earthquake_Affected, name='Earthquake_Affected'),
     path('Flood_Deaths/', views.Flood_Deaths, name='Flood_Deaths'),
     path('Flood_Displaced/', views.Flood_Displaced, name='Flood_Displaced'),
+    path('EstimatedResult/<str:Type>/<str:Lat>/<str:Long>/<str:Result>', views.EstimatedResult, name='EstimatedResult'),
     path('news/', views.news, name='news'),
     path('Flood_Events/<str:type>', views.Flood_Events, name='Flood_Events'),
     path('Earthquake_Events/<str:type>', views.Earthquake_Events, name='Earthquake_Events'),

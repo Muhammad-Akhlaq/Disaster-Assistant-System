@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block earthquake_estimationactive %}active{% endblock earthquake_estimationactive %}
+{% block title %}
+Estimated Result
+{% endblock title %}
+{% block additional_styles %}
+<style>
+  #page{
+    height: 100vh;
+  }
+  #Result{
+    width: 50%;
+    height: auto;
+  }
+  #map{
+    height: 400px;
+    width: 50%;
+    margin-left: 20px;
+  }
+  h3{
+    margin: 3px;
+  }
+  p{
+    margin-left: 4px;
+  }
+</style>
+{% endblock additional_styles %}
+{% block body %}
+{% if Result %}
+<div id="page">
+  <h2 style="text-align: center;">Estimated Results</h2>
+    <h3>Result:</h3><br>
+    <div id="Result">
+      <canvas id="Damage" width="100" height="15"></canvas>
+      </div>
+      <p>Our system estimate that <strong>{{range}}</strong> people can <strong>{{Type}}.</strong></p><br><br>
+      <br><br>
+      <h3>Location:</h4><br>
+      <div id="map"></div>
+      <div style="position:absolute; bottom: 0;width: 100%;">
+      <h4 style="text-align: center;">This information is not authenticated by any official source</h4>
+    </div>
+</div>
+{% endif %}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdnBgsXjTaRSv3_d5MOBpeCOuBghDWZK4&callback=initMap&libraries=&v=weekly"
+      async></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+  var color = color()
+  function color(){
+    if ("{{Result|safe}}" == "GREEN") {
+        colors = "#005504";
+      } else if ("{{Result|safe}}" == "BLUE") {
+        colors = "#092477";
+      } else if ("{{Result|safe}}" == "YELLOW") {
+        colors = "#efe316";
+      } else if ("{{Result|safe}}" == "ORANGE") {
+        colors = "#e35905";
+      } else {
+        colors = "#b80a0a";
+      }
+      return colors;
+  }
+  var ctx = document.getElementById('Damage').getContext('2d');
+var Damage = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        datasets: [{
+            label: 'Damage',
+            data: [{{value|safe}}],
+            backgroundColor: color,
+            }],
+        labels: ["{{Result|safe}}"],
+    },
+    options: {
+        scales: {
+          xAxes: [{
+                ticks: {
+                    stacked: true,
+                    beginAtZero: true,
+                    min: 0,
+                    max:{{value|safe}}
+                }
+            }]
+        }
+    }
+});
+
+
+
+
+function initMap() {
+        const myLatLng = { lat: {{lattitude}}, lng: {{longitude}} };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: myLatLng,
+        });
+        new google.maps.Marker({
+          position: myLatLng,
+          map,
+          title: "Hello World!",
+        });
+      }
+    </script>
+
+
+
+</script>
+
+{% endblock body %}

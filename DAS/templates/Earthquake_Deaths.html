@@ -3,16 +3,9 @@
 {% block title %}
 Estimation
 {% endblock title %}
-{% block additional_styles %}
-<style>
-   #form {
-    display: {{Display}};
-   }
-</style>
-{% endblock additional_styles %}
 {% block body %}
 
- {% if user.is_authenticated %}
+
  <h2 class="text-center my-3">Death Estimation</h2>
 
 <div class="container my-3" id='form'>
@@ -54,22 +47,10 @@ Estimation
             <textarea class="form-control" id="Longitude" name="Longitude" rows="1" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Predict</button>
+        <button type="submit" class="btn btn-primary">Estimate</button>
     </form>
 </div>
 
-    {% else %}
-    <p>Please login to see this page.</p>
     
-    {% endif %}
-
-
-{% if Dead %}
-<div>
-    <h3>Predicted Deaths : {{Dead}}</h3>
-</div>
-{% endif %}
-
-
 
 {% endblock body %}
