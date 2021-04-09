@@ -11,6 +11,13 @@ News
    p{
        margin: 0;
    }
+   table{
+     margin: 0;
+     padding: 0;
+   }
+   td{
+     padding-right: 40px;
+   }
 </style>
 {% endblock additional_styles %}
 {% block body %}
@@ -24,24 +31,28 @@ News
 {% for headline,discription, country, date,type,status in data %}
 
 <div class="m-4 p-3 border">
-    <table style="width:100%">
+    <table>
         <tr>
-          <th>Country: </th>
-          <th>Date & Time: </th> 
-          <th>Disaster Type: </th>
-          <th>status: </th>
+          <th>Country:</th>
+          <td>{{country}}</td>
+          <th>Date & Time:</th>
+          <td>{{date}}</td> 
+          <th>Disaster Type:</th>
+          <td>{{type}}</td>
+          <th>status:</th>
+          <td>{{status}}</td>
         </tr>
-        <tr>
-            <td>{{country}}</td>
-            <td>{{date}}</td> 
-            <td>{{type}}</td>
-            <td>{{status}}</td>
-        </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Headline:</th>
+        <td>{{headline}}</td>
+      </tr>
+      <tr>
+        <th>Discription:</th>
+        <td>{{discription|safe|slice:300}}</td>
+      </tr>
       </table>
-    <h3>Headline:</h3>
-    <p>{{headline}}</p>
-    <h4>Discription:</h4>
-    <p>{{discription|safe|slice:300}}</p>
 </div>
 
 

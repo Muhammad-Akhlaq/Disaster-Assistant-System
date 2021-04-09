@@ -9,26 +9,45 @@ Estimated Result
     height: 100vh;
   }
   #Result{
-    width: 50%;
+    width: 100%;
     height: auto;
+    margin-left: 20px;
   }
   #map{
     height: 400px;
-    width: 50%;
+    width: 100%;
     margin-left: 20px;
   }
   h3{
     margin: 3px;
+    margin-left: 20px;
   }
   p{
-    margin-left: 4px;
+    margin-left: 20px;
   }
+  /* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  height: auto;
+  content: "";
+  display: table;
+  clear: both;
+}
 </style>
 {% endblock additional_styles %}
 {% block body %}
 {% if Result %}
+<h2 style="text-align: center;">Estimated Results</h2>
 <div id="page">
-  <h2 style="text-align: center;">Estimated Results</h2>
+  <div class="row">
+  <div class="column">
+  
     <h3>Result:</h3><br>
     <div id="Result">
       <canvas id="Damage" width="100" height="15"></canvas>
@@ -37,9 +56,13 @@ Estimated Result
       <br><br>
       <h3>Location:</h4><br>
       <div id="map"></div>
-      <div style="position:absolute; bottom: 0;width: 100%;">
-      <h4 style="text-align: center;">This information is not authenticated by any official source</h4>
-    </div>
+  </div>
+  <div class="column">
+
+  </div>
+</div>
+  <h4 style="text-align: center;">This information is not authenticated by any official source</h4>
+
 </div>
 {% endif %}
 
