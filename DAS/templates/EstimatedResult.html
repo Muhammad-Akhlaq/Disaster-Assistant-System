@@ -6,7 +6,7 @@ Estimated Result
 {% block additional_styles %}
 <style>
   #page{
-    height: 100vh;
+    height: 135vh;
   }
   #Result{
     width: 100%;
@@ -42,20 +42,27 @@ Estimated Result
 </style>
 {% endblock additional_styles %}
 {% block body %}
+<div class="mx-5 my-3">
 {% if Result %}
 <h2 style="text-align: center;">Estimated Results</h2>
 <div id="page">
+<<<<<<< Updated upstream
   <div class="row">
   <div class="column">
   
     <h3>Result:</h3><br>
+=======
+  <h2 style="text-align: center;">Estimated Results</h2>
+    <h4 class="mt-4">Result:</h4><br>
+>>>>>>> Stashed changes
     <div id="Result">
       <canvas id="Damage" width="100" height="15"></canvas>
       </div>
       <p>Our system estimate that <strong>{{range}}</strong> people can <strong>{{Type}}.</strong></p><br><br>
       <br><br>
-      <h3>Location:</h4><br>
+      <h4>Location:</h4><br>
       <div id="map"></div>
+<<<<<<< Updated upstream
   </div>
   <div class="column">
 
@@ -63,6 +70,11 @@ Estimated Result
 </div>
   <h4 style="text-align: center;">This information is not authenticated by any official source</h4>
 
+=======
+    </div>
+      <div>
+      <h4 style="text-align: center;">This information is not authenticated by any official govt. source</h4>
+>>>>>>> Stashed changes
 </div>
 {% endif %}
 
@@ -130,5 +142,5 @@ function initMap() {
 
 
 </script>
-
+</div>
 {% endblock body %}

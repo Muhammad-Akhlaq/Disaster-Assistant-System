@@ -811,7 +811,12 @@ def myprofile(request,username):
     context = {'profile':profile}
     if request.method=='POST':
         user_name= request.POST['username']
-        photo = request.FILES['profile']
+        try:
+            photo = request.FILES['profile']
+        except:
+            profile = UserProfile.objects.get(user=user.id)
+            photo = profile.files
+        #photo = request.FILES['profile']
         bio = request.POST['bio']
         fname= request.POST['f_name']
         lname= request.POST['l_name']
