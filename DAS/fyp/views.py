@@ -296,16 +296,16 @@ def EstimatedResult(request,Type,Lat,Long,Result):
 
 #get range by estmated result
 def death_range(result):
-    if result == "GREEN":
+    if result == "Low":
         range = "0 to 10"
         value = 10
-    elif result == "BLUE":
+    elif result == "Medium":
         range = "0 to 30"
         value = 30
-    elif result == "YELLOW":
+    elif result == "High":
         range = "0 to 50"
         value = 50
-    elif result=="ORANGE":
+    elif result=="Very High":
         range = "0 to 100"
         value = 100
     else:
@@ -314,16 +314,16 @@ def death_range(result):
     return range,value
 
 def Injured_range(result):
-    if result == "GREEN":
+    if result == "Low":
         range = "0 to 20"
         value = 20
-    elif result == "BLUE":
+    elif result == "Medium":
         range = "0 to 50"
         value = 50
-    elif result == "YELLOW":
+    elif result == "High":
         range = "0 to 100"
         value = 100
-    elif result=="ORANGE":
+    elif result=="Very High":
         range = "0 to 200"
         value = 200
     else:
@@ -332,16 +332,16 @@ def Injured_range(result):
     return range,value
 
 def Affected_range(result):
-    if result == "GREEN":
+    if result == "Low":
         range = "0 to 50"
         value = 50
-    elif result == "BLUE":
+    elif result == "Medium":
         range = "0 to 100"
         value = 100
-    elif result == "YELLOW":
+    elif result == "High":
         range = "0 to 200"
         value = 200
-    elif result=="ORANGE":
+    elif result=="Very High":
         range = "0 to 300"
         value = 300
     else:

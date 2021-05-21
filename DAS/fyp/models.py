@@ -9,7 +9,6 @@ class Blog(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     content = RichTextField()
-    #content = models.TextField()
     short_desc = models.CharField(max_length=300, default="")
     slug = models.SlugField(max_length=25)
     time = models.DateTimeField(auto_now_add=True)
