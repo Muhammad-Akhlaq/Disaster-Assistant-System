@@ -214,13 +214,13 @@ var No_of_Deaths_pie = new Chart(ctx, {
             data: {{dead_count|safe}},
         backgroundColor: [
                     '#1a8604',
-                    '#f61212',
                     '#0839f0',
-                    '#fe7a04',
                     '#e9f308',
+                    '#fe7a04',
+                    '#f61212',
                 ]
         }],
-        labels: {{dead_label|safe}}
+        labels: ['Low', 'Medium', 'High', 'Very High', 'Extreme']
     },
 });
 var ctx = document.getElementById('No_of_Injureds_pie').getContext('2d');
@@ -231,13 +231,13 @@ var No_of_Injureds_pie = new Chart(ctx, {
             data: {{Injured_count|safe}},
         backgroundColor: [
                     '#1a8604',
-                    '#f61212',
                     '#0839f0',
-                    '#fe7a04',
                     '#e9f308',
+                    '#fe7a04',
+                    '#f61212',
                 ]
         }],
-        labels: {{Injured_label|safe}}
+        labels: ['Low', 'Medium', 'High', 'Very High', 'Extreme']
     },
 });
 var ctx = document.getElementById('No_of_Injureds').getContext('2d');
@@ -312,13 +312,13 @@ var No_of_Affecteds_pie = new Chart(ctx, {
             data: {{Affected_count|safe}},
         backgroundColor: [
                     '#1a8604',
-                    '#f61212',
                     '#0839f0',
-                    '#fe7a04',
                     '#e9f308',
+                    '#fe7a04',
+                    '#f61212',
                 ]
         }],
-        labels: {{Affected_label|safe}}
+        labels: ['Low', 'Medium', 'High', 'Very High', 'Extreme']
     },
 });
 </script>
